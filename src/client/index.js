@@ -1,12 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter as Router } from "react-router-dom";
+import App from "./app";
 
-const App = () => {
-  return (
-    <h1 className="app" style={{ color: "white" }}>
-      Hello Oh NO My World!!!!!
-    </h1>
-  );
-};
-
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(
+  <Router>
+    <App />
+  </Router>,
+  document.getElementById("root")
+);

@@ -1,6 +1,7 @@
 const path = require("path");
 const express = require("express");
 const morgan = require("morgan");
+const db = require("./db");
 
 const app = express();
 
@@ -12,13 +13,14 @@ const createApp = () => {
 
   app.use(express.static(path.join(__dirname, "..", "public")));
 
-  //   app.get("/", (req, res, next) => {
-  //     try {
-  //       console.log("Home Page");
-  //     } catch (error) {
-  //       next(error);
-  //     }
-  //   });
+  app.get("/api", (req, res, next) => {
+    try {
+      console.log("inside API ROUTE");
+      res.send("API");
+    } catch (error) {
+      next(error);
+    }
+  });
 
   app.use((req, res, next) => {
     if (path.extname(req.path).length) {
@@ -45,9 +47,11 @@ const startListening = () => {
   const server = app.listen(3000, () => {
     console.log(`listening on port 3000!`);
   });
-
   // could set up socket server here
 };
 
+const syncDb = () => db.sync();
+
+syncDb();
 createApp();
 startListening();
