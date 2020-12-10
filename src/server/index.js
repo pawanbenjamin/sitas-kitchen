@@ -13,14 +13,7 @@ const createApp = () => {
 
   app.use(express.static(path.join(__dirname, "..", "public")));
 
-  app.get("/api", (req, res, next) => {
-    try {
-      console.log("inside API ROUTE");
-      res.send("API");
-    } catch (error) {
-      next(error);
-    }
-  });
+  app.use("/api", require("./api"));
 
   app.use((req, res, next) => {
     if (path.extname(req.path).length) {
