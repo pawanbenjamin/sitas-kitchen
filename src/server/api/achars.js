@@ -38,4 +38,15 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
+router.put("/:id", async (req, res, next) => {
+  try {
+    const achar = await Achar.findByPk(req.params.id);
+    if (!achar) res.sendStatus(404);
+    const updatedAchar = achar.update(req.body);
+    res.send(updatedAchar);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;

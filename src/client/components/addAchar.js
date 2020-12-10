@@ -18,7 +18,7 @@ class AddAchar extends React.Component {
     const spiceLevel = e.target.spiceLevel.value;
     const stockQty = e.target.stockQty.value;
     const imageUrl = e.target.imageUrl.value;
-    this.props.addAchar({
+    await this.props.addAchar({
       name,
       price,
       description,
@@ -26,12 +26,14 @@ class AddAchar extends React.Component {
       stockQty,
       imageUrl,
     });
+    const form = document.getElementById("addAchar");
+    form.reset();
   }
 
   render() {
     return (
       <div className="addAchar">
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit} id="addAchar">
           <label>Name:</label>
           <input name="name"></input>
           <label>Price</label>

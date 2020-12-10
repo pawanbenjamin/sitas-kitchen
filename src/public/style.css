@@ -19,6 +19,14 @@ body {
   flex-direction: column;
 }
 
+.updateAchar {
+  align-items: center;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
 .singleAchar {
   align-items: center;
   text-align: center;
@@ -36,6 +44,14 @@ body {
 }
 
 .addAchar {
+  align-items: center;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+form {
   align-items: center;
   text-align: center;
   display: flex;

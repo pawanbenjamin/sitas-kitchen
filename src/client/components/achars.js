@@ -29,9 +29,9 @@ class Achars extends React.Component {
               <div key={achar.id}>
                 <h3>{achar.name}</h3>
                 <Link to={`/achars/${achar.id}`}>View</Link>
-                <button id={achar.id} onClick={this.handleDelete}>
+                {/* <button id={achar.id} onClick={this.handleDelete}>
                   Delete from DB
-                </button>
+                </button> */}
               </div>
             ))
           : null}

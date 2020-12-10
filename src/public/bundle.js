@@ -2077,8 +2077,6 @@ var Achars = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
-
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "achars"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "All the Achars"), this.props.achars ? this.props.achars.map(function (achar) {
@@ -2086,10 +2084,7 @@ var Achars = /*#__PURE__*/function (_React$Component) {
           key: achar.id
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, achar.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
           to: "/achars/".concat(achar.id)
-        }, "View"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-          id: achar.id,
-          onClick: _this2.handleDelete
-        }, "Delete from DB"));
+        }, "View"));
       }) : null);
     }
   }]);
@@ -2184,7 +2179,7 @@ var AddAchar = /*#__PURE__*/function (_React$Component) {
     key: "handleSubmit",
     value: function () {
       var _handleSubmit = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(e) {
-        var name, price, description, spiceLevel, stockQty, imageUrl;
+        var name, price, description, spiceLevel, stockQty, imageUrl, form;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -2196,7 +2191,8 @@ var AddAchar = /*#__PURE__*/function (_React$Component) {
                 spiceLevel = e.target.spiceLevel.value;
                 stockQty = e.target.stockQty.value;
                 imageUrl = e.target.imageUrl.value;
-                this.props.addAchar({
+                _context.next = 9;
+                return this.props.addAchar({
                   name: name,
                   price: price,
                   description: description,
@@ -2205,7 +2201,11 @@ var AddAchar = /*#__PURE__*/function (_React$Component) {
                   imageUrl: imageUrl
                 });
 
-              case 8:
+              case 9:
+                form = document.getElementById("addAchar");
+                form.reset();
+
+              case 11:
               case "end":
                 return _context.stop();
             }
@@ -2225,7 +2225,8 @@ var AddAchar = /*#__PURE__*/function (_React$Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "addAchar"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
-        onSubmit: this.handleSubmit
+        onSubmit: this.handleSubmit,
+        id: "addAchar"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, "Name:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         name: "name"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, "Price"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
@@ -2333,6 +2334,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _store_singleAchar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/singleAchar */ "./src/client/store/singleAchar.js");
+/* harmony import */ var _updateAchar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./updateAchar */ "./src/client/components/updateAchar.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2364,6 +2366,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var SingleAchar = /*#__PURE__*/function (_React$Component) {
   _inherits(SingleAchar, _React$Component);
 
@@ -2375,10 +2378,11 @@ var SingleAchar = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, SingleAchar);
 
     _this = _super.call(this, props);
-    _this.handleDelete = _this.handleDelete.bind(_assertThisInitialized(_this));
     _this.state = {
       isDeleted: false
     };
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.handleDelete = _this.handleDelete.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -2388,19 +2392,68 @@ var SingleAchar = /*#__PURE__*/function (_React$Component) {
       this.props.getAchar(this.props.match.params.id);
     }
   }, {
-    key: "handleDelete",
+    key: "handleSubmit",
     value: function () {
-      var _handleDelete = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(e) {
+      var _handleSubmit = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(e) {
+        var name, price, description, spiceLevel, stockQty, imageUrl, form;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 e.preventDefault();
-                _context.next = 3;
+                name = e.target.name.value;
+                price = e.target.price.value;
+                description = e.target.description.value;
+                spiceLevel = e.target.spiceLevel.value;
+                stockQty = e.target.stockQty.value;
+                imageUrl = e.target.imageUrl.value;
+                _context.next = 9;
+                return this.props.updateAchar({
+                  name: name,
+                  price: price,
+                  description: description,
+                  spiceLevel: spiceLevel,
+                  stockQty: stockQty,
+                  imageUrl: imageUrl,
+                  id: this.props.achar.id
+                });
+
+              case 9:
+                _context.next = 11;
+                return this.props.getAchar(this.props.match.params.id);
+
+              case 11:
+                form = document.getElementById("updateAchar");
+                form.reset();
+
+              case 13:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function handleSubmit(_x) {
+        return _handleSubmit.apply(this, arguments);
+      }
+
+      return handleSubmit;
+    }()
+  }, {
+    key: "handleDelete",
+    value: function () {
+      var _handleDelete = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(e) {
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                e.preventDefault();
+                _context2.next = 3;
                 return this.props.deleteAchar(this.props.match.params.id);
 
               case 3:
-                _context.next = 5;
+                _context2.next = 5;
                 return this.props.getAchar(this.props.match.params.id);
 
               case 5:
@@ -2410,13 +2463,13 @@ var SingleAchar = /*#__PURE__*/function (_React$Component) {
 
               case 6:
               case "end":
-                return _context.stop();
+                return _context2.stop();
             }
           }
-        }, _callee, this);
+        }, _callee2, this);
       }));
 
-      function handleDelete(_x) {
+      function handleDelete(_x2) {
         return _handleDelete.apply(this, arguments);
       }
 
@@ -2434,7 +2487,9 @@ var SingleAchar = /*#__PURE__*/function (_React$Component) {
         width: 150
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, achar.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, achar.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Price: $", achar.price / 100), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         onClick: this.handleDelete
-      }, "Delete from DB")));
+      }, "Delete from DB"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_updateAchar__WEBPACK_IMPORTED_MODULE_3__.default, {
+        handleSubmit: this.handleSubmit
+      })));
     }
   }]);
 
@@ -2454,11 +2509,98 @@ var mapDispatch = function mapDispatch(dispatch) {
     },
     deleteAchar: function deleteAchar(id) {
       return dispatch((0,_store_singleAchar__WEBPACK_IMPORTED_MODULE_2__.deleteTheAchar)(id));
+    },
+    updateAchar: function updateAchar(achar) {
+      return dispatch((0,_store_singleAchar__WEBPACK_IMPORTED_MODULE_2__.updateTheAchar)(achar));
     }
   };
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapState, mapDispatch)(SingleAchar));
+
+/***/ }),
+
+/***/ "./src/client/components/updateAchar.js":
+/*!**********************************************!*
+  !*** ./src/client/components/updateAchar.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => /* binding */ UpdateAchar
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _store_singleAchar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/singleAchar */ "./src/client/store/singleAchar.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+var UpdateAchar = /*#__PURE__*/function (_React$Component) {
+  _inherits(UpdateAchar, _React$Component);
+
+  var _super = _createSuper(UpdateAchar);
+
+  function UpdateAchar(props) {
+    _classCallCheck(this, UpdateAchar);
+
+    return _super.call(this, props);
+  }
+
+  _createClass(UpdateAchar, [{
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "updateAchar"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+        id: "updateAchar",
+        onSubmit: this.props.handleSubmit
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, "Name:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        name: "name"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, "Price"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        name: "price"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, "Description"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        name: "description"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, "Spice Level"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        name: "spiceLevel"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, "Stock Quantity:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        name: "stockQty"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, "Image Url:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        name: "imageUrl"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        type: "submit"
+      }, "Submit")));
+    }
+  }]);
+
+  return UpdateAchar;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+
 
 /***/ }),
 
@@ -2722,6 +2864,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "fetchAchar": () => /* binding */ fetchAchar,
 /* harmony export */   "deleteTheAchar": () => /* binding */ deleteTheAchar,
+/* harmony export */   "updateTheAchar": () => /* binding */ updateTheAchar,
 /* harmony export */   "default": () => /* export default binding */ __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
@@ -2733,6 +2876,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 var GET_ACHAR = "GET_ACHAR";
 var DELETE_ACHAR = "DELETE_ACHAR";
+var UPDATE_ACHAR = "UPDATE_ACHAR";
 
 var gotAchar = function gotAchar(singleAchar) {
   return {
@@ -2744,6 +2888,13 @@ var gotAchar = function gotAchar(singleAchar) {
 var deleteAchar = function deleteAchar(achar) {
   return {
     type: DELETE_ACHAR,
+    achar: achar
+  };
+};
+
+var updateAchar = function updateAchar(achar) {
+  return {
+    type: UPDATE_ACHAR,
     achar: achar
   };
 };
@@ -2829,6 +2980,44 @@ var deleteTheAchar = function deleteTheAchar(id) {
     };
   }();
 };
+var updateTheAchar = function updateTheAchar(achar) {
+  return /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(dispatch) {
+      var _yield$axios$put, data;
+
+      return regeneratorRuntime.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.prev = 0;
+              _context3.next = 3;
+              return axios__WEBPACK_IMPORTED_MODULE_0___default().put("/api/achars/".concat(achar.id), achar);
+
+            case 3:
+              _yield$axios$put = _context3.sent;
+              data = _yield$axios$put.data;
+              dispatch(updateAchar(data));
+              _context3.next = 11;
+              break;
+
+            case 8:
+              _context3.prev = 8;
+              _context3.t0 = _context3["catch"](0);
+              console.error(_context3.t0);
+
+            case 11:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3, null, [[0, 8]]);
+    }));
+
+    return function (_x3) {
+      return _ref3.apply(this, arguments);
+    };
+  }();
+};
 /* harmony default export */ function __WEBPACK_DEFAULT_EXPORT__() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
@@ -2838,6 +3027,9 @@ var deleteTheAchar = function deleteTheAchar(id) {
       return action.singleAchar;
 
     case DELETE_ACHAR:
+      return action.achar;
+
+    case UPDATE_ACHAR:
       return action.achar;
 
     default:
