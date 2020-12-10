@@ -1,3 +1,44 @@
 body {
   background: green;
+  display: flex;
+  justify-content: center;
+}
+
+.nav {
+  display: flex;
+  width: 400px;
+  background-color: chartreuse;
+  justify-content: space-evenly;
+  border-radius: 25px;
+}
+
+.achars {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.singleAchar {
+  align-items: center;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.home {
+  align-items: center;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.addAchar {
+  align-items: center;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }

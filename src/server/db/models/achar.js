@@ -19,6 +19,10 @@ const Achar = db.define("achar", {
   stockQty: {
     type: Sequelize.INTEGER,
   },
+  imageUrl: {
+    type: Sequelize.TEXT,
+    defaultValue: "https://nepalimoms.com/recipes/vegMomo/vegMomo_achar.jpg",
+  },
 });
 
 module.exports = Achar;
