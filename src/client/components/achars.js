@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { fetchAchars, deleteTheAchar } from "../store/achars";
+import { fetchAchars } from "../store/achars";
+import { deleteTheAchar } from "../store/singleAchar";
 
 class Achars extends React.Component {
   constructor(props) {

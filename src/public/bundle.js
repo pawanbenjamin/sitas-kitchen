@@ -1988,9 +1988,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _store_achars__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/achars */ "./src/client/store/achars.js");
+/* harmony import */ var _store_singleAchar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../store/singleAchar */ "./src/client/store/singleAchar.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2016,6 +2017,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 
 
 
@@ -2082,7 +2084,7 @@ var Achars = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "All the Achars"), this.props.achars ? this.props.achars.map(function (achar) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           key: achar.id
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, achar.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, achar.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
           to: "/achars/".concat(achar.id)
         }, "View"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
           id: achar.id,
@@ -2107,7 +2109,7 @@ var mapDis = function mapDis(dispatch) {
       return dispatch((0,_store_achars__WEBPACK_IMPORTED_MODULE_2__.fetchAchars)());
     },
     deleteAchar: function deleteAchar(id) {
-      return dispatch((0,_store_achars__WEBPACK_IMPORTED_MODULE_2__.deleteTheAchar)(id));
+      return dispatch((0,_store_singleAchar__WEBPACK_IMPORTED_MODULE_3__.deleteTheAchar)(id));
     }
   };
 };
@@ -2331,8 +2333,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _store_singleAchar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/singleAchar */ "./src/client/store/singleAchar.js");
-/* harmony import */ var _store_achars__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../store/achars */ "./src/client/store/achars.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -2371,6 +2376,9 @@ var SingleAchar = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.handleDelete = _this.handleDelete.bind(_assertThisInitialized(_this));
+    _this.state = {
+      isDeleted: false
+    };
     return _this;
   }
 
@@ -2381,21 +2389,52 @@ var SingleAchar = /*#__PURE__*/function (_React$Component) {
     }
   }, {
     key: "handleDelete",
-    value: function handleDelete(e) {
-      e.preventDefault();
-      this.props.deleteAchar(this.props.match.params.id);
-    }
+    value: function () {
+      var _handleDelete = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(e) {
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                e.preventDefault();
+                _context.next = 3;
+                return this.props.deleteAchar(this.props.match.params.id);
+
+              case 3:
+                _context.next = 5;
+                return this.props.getAchar(this.props.match.params.id);
+
+              case 5:
+                this.setState({
+                  isDeleted: true
+                });
+
+              case 6:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function handleDelete(_x) {
+        return _handleDelete.apply(this, arguments);
+      }
+
+      return handleDelete;
+    }()
   }, {
     key: "render",
     value: function render() {
       var achar = this.props.achar;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "singleAchar"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+      }, this.state.isDeleted ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "No Product!") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
         src: achar.imageUrl,
         height: 150,
         width: 150
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, achar.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, achar.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Price: $", achar.price / 100));
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, achar.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, achar.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Price: $", achar.price / 100), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        onClick: this.handleDelete
+      }, "Delete from DB")));
     }
   }]);
 
@@ -2412,6 +2451,9 @@ var mapDispatch = function mapDispatch(dispatch) {
   return {
     getAchar: function getAchar(id) {
       return dispatch((0,_store_singleAchar__WEBPACK_IMPORTED_MODULE_2__.fetchAchar)(id));
+    },
+    deleteAchar: function deleteAchar(id) {
+      return dispatch((0,_store_singleAchar__WEBPACK_IMPORTED_MODULE_2__.deleteTheAchar)(id));
     }
   };
 };
@@ -2503,7 +2545,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "fetchAchars": () => /* binding */ fetchAchars,
 /* harmony export */   "addAnAchar": () => /* binding */ addAnAchar,
-/* harmony export */   "deleteTheAchar": () => /* binding */ deleteTheAchar,
 /* harmony export */   "default": () => /* export default binding */ __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
@@ -2527,8 +2568,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
  // Actions
 
 var GET_ACHARS = "GET_ACHARS";
-var ADD_ACHAR = "ADD_ACHAR";
-var DELETE_ACHAR = "DELETE_ACHAR"; // Action Creators
+var ADD_ACHAR = "ADD_ACHAR"; // Action Creators
 
 var gotAchars = function gotAchars(achars) {
   return {
@@ -2540,13 +2580,6 @@ var gotAchars = function gotAchars(achars) {
 var addAchar = function addAchar(achar) {
   return {
     type: ADD_ACHAR,
-    achar: achar
-  };
-};
-
-var deleteAchar = function deleteAchar(achar) {
-  return {
-    type: DELETE_ACHAR,
     achar: achar
   };
 }; // Thunk
@@ -2624,42 +2657,6 @@ var addAnAchar = function addAnAchar(achar) {
     };
   }();
 };
-var deleteTheAchar = function deleteTheAchar(id) {
-  return /*#__PURE__*/function () {
-    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(dispatch) {
-      var deletedAchar;
-      return regeneratorRuntime.wrap(function _callee3$(_context3) {
-        while (1) {
-          switch (_context3.prev = _context3.next) {
-            case 0:
-              _context3.prev = 0;
-              _context3.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_0___default().delete("/api/achars/".concat(id));
-
-            case 3:
-              deletedAchar = _context3.sent;
-              dispatch(deleteAchar(deletedAchar));
-              _context3.next = 10;
-              break;
-
-            case 7:
-              _context3.prev = 7;
-              _context3.t0 = _context3["catch"](0);
-              console.error(_context3.t0);
-
-            case 10:
-            case "end":
-              return _context3.stop();
-          }
-        }
-      }, _callee3, null, [[0, 7]]);
-    }));
-
-    return function (_x3) {
-      return _ref3.apply(this, arguments);
-    };
-  }();
-};
 /* harmony default export */ function __WEBPACK_DEFAULT_EXPORT__() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var action = arguments.length > 1 ? arguments[1] : undefined;
@@ -2670,11 +2667,6 @@ var deleteTheAchar = function deleteTheAchar(id) {
 
     case ADD_ACHAR:
       return [].concat(_toConsumableArray(state), [action.achar]);
-
-    case DELETE_ACHAR:
-      return [state.filter(function (a) {
-        return a.id !== action.achar.id;
-      })];
 
     default:
       return state;
@@ -2729,6 +2721,7 @@ var store = (0,redux__WEBPACK_IMPORTED_MODULE_5__.createStore)(reducer, middlewa
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "fetchAchar": () => /* binding */ fetchAchar,
+/* harmony export */   "deleteTheAchar": () => /* binding */ deleteTheAchar,
 /* harmony export */   "default": () => /* export default binding */ __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
@@ -2739,11 +2732,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 var GET_ACHAR = "GET_ACHAR";
+var DELETE_ACHAR = "DELETE_ACHAR";
 
 var gotAchar = function gotAchar(singleAchar) {
   return {
     type: GET_ACHAR,
     singleAchar: singleAchar
+  };
+};
+
+var deleteAchar = function deleteAchar(achar) {
+  return {
+    type: DELETE_ACHAR,
+    achar: achar
   };
 };
 
@@ -2763,7 +2764,14 @@ var fetchAchar = function fetchAchar(id) {
             case 3:
               _yield$axios$get = _context.sent;
               data = _yield$axios$get.data;
-              dispatch(gotAchar(data));
+
+              if (data === null) {
+                dispatch(gotAchar({}));
+              } else {
+                console.log(data);
+                dispatch(gotAchar(data));
+              }
+
               _context.next = 11;
               break;
 
@@ -2785,6 +2793,42 @@ var fetchAchar = function fetchAchar(id) {
     };
   }();
 };
+var deleteTheAchar = function deleteTheAchar(id) {
+  return /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(dispatch) {
+      var deletedAchar;
+      return regeneratorRuntime.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.prev = 0;
+              _context2.next = 3;
+              return axios__WEBPACK_IMPORTED_MODULE_0___default().delete("/api/achars/".concat(id));
+
+            case 3:
+              deletedAchar = _context2.sent;
+              dispatch(deleteAchar(deletedAchar));
+              _context2.next = 10;
+              break;
+
+            case 7:
+              _context2.prev = 7;
+              _context2.t0 = _context2["catch"](0);
+              console.error(_context2.t0);
+
+            case 10:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2, null, [[0, 7]]);
+    }));
+
+    return function (_x2) {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+};
 /* harmony default export */ function __WEBPACK_DEFAULT_EXPORT__() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
@@ -2792,6 +2836,9 @@ var fetchAchar = function fetchAchar(id) {
   switch (action.type) {
     case GET_ACHAR:
       return action.singleAchar;
+
+    case DELETE_ACHAR:
+      return action.achar;
 
     default:
       return state;
