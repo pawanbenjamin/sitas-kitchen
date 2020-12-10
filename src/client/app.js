@@ -1,10 +1,11 @@
 import React from "react";
 import Routes from "./routes";
+import Nav from "./components/nav"
 
 const App = () => {
   return (
     <div>
-      <h1>Nav</h1>
+      <Nav />
       <Routes />
     </div>
   );

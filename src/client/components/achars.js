@@ -18,7 +18,10 @@ class Achars extends React.Component {
         <h3>All the Achars</h3>
         {this.props.achars
           ? this.props.achars.map((achar) => (
-              <h3 key={achar.id}>{achar.name}</h3>
+              <div key={achar.id}>
+                <h3>{achar.name}</h3>
+                <Link to={`/achars/${achar.id}`}>View</Link>
+              </div>
             ))
           : null}
         <Link to="/">Home</Link>

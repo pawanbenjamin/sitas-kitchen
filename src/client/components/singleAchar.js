@@ -1,29 +1,27 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React from "react";
+import { connect } from "react-redux";
+import { fetchAchar } from "../store/singleAchar";
 
 class SingleAchar extends React.Component {
-    constructor(){
-        super()
-    }
+  constructor(props) {
+    super(props);
+  }
 
-    componentDidMount(){
-        this.props.getAchar(this.props.match.params.id)
-    }
+  componentDidMount() {
+    this.props.getAchar(this.props.match.params.id);
+  }
 
-    render(){
-        return (
-            <h3>Single Achar</h3>
-        )
-    }
+  render() {
+    return <h3>{this.props.achar.name}</h3>;
+  }
 }
 
 const mapState = (state) => ({
-    achar: state.singleAchar
-})
+  achar: state.singleAchar,
+});
 
 const mapDispatch = (dispatch) => ({
-    getAchar: (id) => dispatch(fetchAchar(id))
-})
+  getAchar: (id) => dispatch(fetchAchar(id)),
+});
 
-
-export default connect(mapState, mapDispatch)(SingleAchar)
+export default connect(mapState, mapDispatch)(SingleAchar);
