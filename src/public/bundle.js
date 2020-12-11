@@ -2837,27 +2837,30 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux-logger */ "./node_modules/redux-logger/dist/redux-logger.js");
 /* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux_logger__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-thunk */ "./node_modules/redux-thunk/es/index.js");
 /* harmony import */ var redux_devtools_extension__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux-devtools-extension */ "./node_modules/redux-devtools-extension/index.js");
 /* harmony import */ var _achars__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./achars */ "./src/client/store/achars.js");
 /* harmony import */ var _singleAchar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./singleAchar */ "./src/client/store/singleAchar.js");
+/* harmony import */ var _user__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./user */ "./src/client/store/user.js");
 
 
 
 
 
 
-var reducer = (0,redux__WEBPACK_IMPORTED_MODULE_5__.combineReducers)({
+
+var reducer = (0,redux__WEBPACK_IMPORTED_MODULE_6__.combineReducers)({
   achars: _achars__WEBPACK_IMPORTED_MODULE_3__.default,
-  singleAchar: _singleAchar__WEBPACK_IMPORTED_MODULE_4__.default
+  singleAchar: _singleAchar__WEBPACK_IMPORTED_MODULE_4__.default,
+  user: _user__WEBPACK_IMPORTED_MODULE_5__.default
 });
-var middleware = (0,redux_devtools_extension__WEBPACK_IMPORTED_MODULE_2__.composeWithDevTools)((0,redux__WEBPACK_IMPORTED_MODULE_5__.applyMiddleware)(redux_thunk__WEBPACK_IMPORTED_MODULE_1__.default, (0,redux_logger__WEBPACK_IMPORTED_MODULE_0__.createLogger)({
+var middleware = (0,redux_devtools_extension__WEBPACK_IMPORTED_MODULE_2__.composeWithDevTools)((0,redux__WEBPACK_IMPORTED_MODULE_6__.applyMiddleware)(redux_thunk__WEBPACK_IMPORTED_MODULE_1__.default, (0,redux_logger__WEBPACK_IMPORTED_MODULE_0__.createLogger)({
   collapsed: true
 })));
-var store = (0,redux__WEBPACK_IMPORTED_MODULE_5__.createStore)(reducer, middleware);
+var store = (0,redux__WEBPACK_IMPORTED_MODULE_6__.createStore)(reducer, middleware);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (store);
 
 /***/ }),
@@ -3041,6 +3044,148 @@ var updateTheAchar = function updateTheAchar(achar) {
 
     case UPDATE_ACHAR:
       return action.achar;
+
+    default:
+      return state;
+  }
+}
+
+/***/ }),
+
+/***/ "./src/client/store/user.js":
+/*!**********************************!*
+  !*** ./src/client/store/user.js ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "auth": () => /* binding */ auth,
+/* harmony export */   "createUser": () => /* binding */ createUser,
+/* harmony export */   "default": () => /* export default binding */ __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+ // import history from '../history'
+
+var CREATE_USER = "CREAT_USER";
+var GET_USER = "GET_USER";
+
+var createdUser = function createdUser(user) {
+  return {
+    type: CREATE_USER,
+    user: user
+  };
+};
+
+var gotUser = function gotUser(user) {
+  return {
+    type: GET_USER,
+    user: user
+  };
+};
+
+var auth = function auth(username, firstName, lastName, email, password, method) {
+  return /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch) {
+      var res;
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              _context.next = 3;
+              return axios__WEBPACK_IMPORTED_MODULE_0___default().post("/auth/".concat(method), {
+                username: username,
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                password: password
+              });
+
+            case 3:
+              res = _context.sent;
+              _context.next = 9;
+              break;
+
+            case 6:
+              _context.prev = 6;
+              _context.t0 = _context["catch"](0);
+              return _context.abrupt("return", dispatch(gotUser({
+                error: _context.t0
+              })));
+
+            case 9:
+              try {
+                dispatch(gotUser(res.data)); //   history.pushState('/home')
+              } catch (dispatchOrHistError) {
+                console.error(dispatchOrHistError);
+              }
+
+            case 10:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[0, 6]]);
+    }));
+
+    return function (_x) {
+      return _ref.apply(this, arguments);
+    };
+  }();
+};
+var createUser = function createUser(userParams) {
+  return /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(dispatch) {
+      var newUser;
+      return regeneratorRuntime.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.prev = 0;
+              _context2.next = 3;
+              return axios__WEBPACK_IMPORTED_MODULE_0___default().post("/api/users", userParams);
+
+            case 3:
+              newUser = _context2.sent;
+              dispatch(createdUser(newUser.data));
+              _context2.next = 10;
+              break;
+
+            case 7:
+              _context2.prev = 7;
+              _context2.t0 = _context2["catch"](0);
+              console.error(_context2.t0);
+
+            case 10:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2, null, [[0, 7]]);
+    }));
+
+    return function (_x2) {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+};
+/* harmony default export */ function __WEBPACK_DEFAULT_EXPORT__() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case GET_USER:
+      return action.user;
+
+    case CREATE_USER:
+      return action.user;
 
     default:
       return state;

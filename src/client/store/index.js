@@ -3,11 +3,13 @@ import { createLogger } from "redux-logger";
 import thunkMiddleware from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import achars from "./achars";
-import singleAchar from './singleAchar'
+import singleAchar from "./singleAchar";
+import user from "./user";
 
 const reducer = combineReducers({
   achars,
-  singleAchar
+  singleAchar,
+  user,
 });
 
 const middleware = composeWithDevTools(
