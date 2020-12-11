@@ -1,5 +1,5 @@
 const db = require("./src/server/db");
-const { Achar } = require("./src/server/db/models");
+const { Achar, User } = require("./src/server/db/models");
 
 async function seed() {
   await db.sync({ force: true });
@@ -24,7 +24,27 @@ async function seed() {
     },
   ];
 
+  const users = [
+    {
+      username: "sitaKhati",
+      firstName: "Sita",
+      lastName: "Khati",
+      email: "sitakbenjamin@gmail.com",
+      isAdmin: true,
+      password: "sitaskitchen",
+    },
+    {
+      username: "pawan",
+      firstName: "Pawan",
+      lastName: "Benjamin",
+      email: "pawanbenjamin@gmail.com",
+      isAdmin: true,
+      password: "sitaskitchen",
+    },
+  ];
+
   await Promise.all(achars.map((achar) => Achar.create(achar)));
+  await Promise.all(users.map((user) => User.create(user)));
 
   console.log(`seeded ${achars.length} achars`);
   console.log(`seeded successfully`);
