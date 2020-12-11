@@ -28,6 +28,7 @@ body {
 }
 
 .singleAchar {
+  margin-top: 5em;
   align-items: center;
   text-align: center;
   display: flex;

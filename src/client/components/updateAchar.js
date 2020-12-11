@@ -1,6 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
-import { fetchAchar, updateTheAchar } from "../store/singleAchar";
 
 export default class UpdateAchar extends React.Component {
   constructor(props) {
@@ -11,18 +9,17 @@ export default class UpdateAchar extends React.Component {
     return (
       <div className="updateAchar">
         <form id="updateAchar" onSubmit={this.props.handleSubmit}>
-          <label>Name:</label>
-          <input name="name"></input>
-          <label>Price</label>
-          <input name="price"></input>
-          <label>Description</label>
-          <input name="description"></input>
-          <label>Spice Level</label>
-          <input name="spiceLevel"></input>
-          <label>Stock Quantity:</label>
-          <input name="stockQty"></input>
-          <label>Image Url:</label>
-          <input name="imageUrl"></input>
+          <input name="name" placeholder="Name"></input>
+
+          <input name="price" placeholder="Price"></input>
+
+          <input name="description" placeholder="Description"></input>
+
+          <input name="spiceLevel" placeholder="Spice Level"></input>
+
+          <input name="stockQty" placeholder="Stock Qty"></input>
+
+          <input name="imageUrl" placeholder="Image URL"></input>
           <button type="submit">Submit</button>
         </form>
       </div>

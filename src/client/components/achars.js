@@ -5,8 +5,8 @@ import { fetchAchars } from "../store/achars";
 import { deleteTheAchar } from "../store/singleAchar";
 
 class Achars extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.handleDelete = this.handleDelete.bind(this);
   }
 
@@ -21,6 +21,7 @@ class Achars extends React.Component {
   }
 
   render() {
+    console.log(this.props.achars);
     return (
       <div className="achars">
         <h3>All the Achars</h3>

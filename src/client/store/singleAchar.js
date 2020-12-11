@@ -19,6 +19,7 @@ const updateAchar = (achar) => ({
   achar,
 });
 
+// THUNK CREATOR
 export const fetchAchar = (id) => async (dispatch) => {
   try {
     const { data } = await axios.get(`/api/achars/${id}`);

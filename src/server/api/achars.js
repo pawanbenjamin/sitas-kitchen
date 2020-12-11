@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const Achar = require("../db/models/achar");
 
+// /api/achars
 router.get("/", async (req, res, next) => {
   try {
     const achars = await Achar.findAll();
