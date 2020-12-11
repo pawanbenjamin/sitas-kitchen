@@ -52,6 +52,14 @@ export const updateTheAchar = (achar) => async (dispatch) => {
   }
 };
 
+export const clearAchar = () => async(dispatch) => {
+  try {
+    dispatch(updateAchar({}))
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 export default function (state = {}, action) {
   switch (action.type) {
     case GET_ACHAR:

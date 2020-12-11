@@ -1,5 +1,5 @@
 import axios from "axios";
-// import history from '../history'
+import history from "../history";
 
 const CREATE_USER = "CREAT_USER";
 const GET_USER = "GET_USER";
@@ -35,7 +35,7 @@ export const auth = (
   }
   try {
     dispatch(gotUser(res.data));
-    //   history.pushState('/home')
+    history.pushState("/home");
   } catch (dispatchOrHistError) {
     console.error(dispatchOrHistError);
   }

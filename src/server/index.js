@@ -2,6 +2,9 @@ const path = require("path");
 const express = require("express");
 const morgan = require("morgan");
 const db = require("./db");
+const dotenv = require("dotenv");
+
+dotenv.config();
 
 const app = express();
 
@@ -13,6 +16,7 @@ const createApp = () => {
 
   app.use(express.static(path.join(__dirname, "..", "public")));
 
+  app.use("/auth", require("./auth"));
   app.use("/api", require("./api"));
 
   // app.use((req, res, next) => {

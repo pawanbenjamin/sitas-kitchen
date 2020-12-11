@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchAchars } from "../store/achars";
-import { deleteTheAchar } from "../store/singleAchar";
+import { deleteTheAchar, clearAchar } from "../store/singleAchar";
 
 class Achars extends React.Component {
   constructor() {
@@ -12,6 +12,7 @@ class Achars extends React.Component {
 
   componentDidMount() {
     this.props.getAchars();
+    this.props.clearSingle();
   }
 
   async handleDelete(e) {
@@ -48,6 +49,7 @@ const mapState = (state) => ({
 const mapDis = (dispatch) => ({
   getAchars: () => dispatch(fetchAchars()),
   deleteAchar: (id) => dispatch(deleteTheAchar(id)),
+  clearSingle: () => dispatch(clearAchar()),
 });
 
 export default connect(mapState, mapDis)(Achars);
