@@ -3,6 +3,7 @@ import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchAchars } from "../store/achars";
 import { deleteTheAchar, clearAchar } from "../store/singleAchar";
+import AddAchar from "./addAchar";
 
 class Achars extends React.Component {
   constructor() {
@@ -22,7 +23,6 @@ class Achars extends React.Component {
   }
 
   render() {
-    console.log(this.props.achars);
     return (
       <div className="achars">
         <h3>All the Achars</h3>
@@ -37,6 +37,7 @@ class Achars extends React.Component {
               </div>
             ))
           : null}
+        <div>{this.props.user.isAdmin ? <AddAchar /> : null}</div>
       </div>
     );
   }
@@ -44,6 +45,7 @@ class Achars extends React.Component {
 
 const mapState = (state) => ({
   achars: state.achars,
+  user: state.user,
 });
 
 const mapDis = (dispatch) => ({

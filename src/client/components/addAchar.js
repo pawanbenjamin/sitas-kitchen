@@ -31,8 +31,11 @@ class AddAchar extends React.Component {
   }
 
   render() {
+    console.log(this.props.user);
+
     return (
       <div className="addAchar">
+        <h3>Add an Achar!</h3>
         <form onSubmit={this.handleSubmit} id="addAchar">
           <label>Name:</label>
           <input name="name"></input>
@@ -53,12 +56,12 @@ class AddAchar extends React.Component {
   }
 }
 
-// const mapState = (state) => ({
-
-// });
+const mapState = (state) => ({
+  user: state.user,
+});
 
 const mapDispatch = (dispatch) => ({
   addAchar: (achar) => dispatch(addAnAchar(achar)),
 });
 
-export default connect(null, mapDispatch)(AddAchar);
+export default connect(mapState, mapDispatch)(AddAchar);

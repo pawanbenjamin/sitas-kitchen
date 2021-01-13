@@ -7,15 +7,20 @@ import Button from "@material-ui/core/Button";
 
 // follow auth-form component
 
-const AuthForm = (props, { history }) => {
+const AuthForm = (props) => {
   const { name, displayName, handleSubmit, error } = props;
 
   return (
     <div>
       <form onSubmit={handleSubmit} name={name}>
-        <input name="username" type="text" placeholder="User-Name" />
-        <input name="firstName" type="text" placeholder="First Name" />
-        <input name="lastName" type="text" placeholder="Last Name" />
+        {name === "signup" && (
+          <>
+            <input name="username" type="text" placeholder="User-Name" />
+            <input name="firstName" type="text" placeholder="First Name" />
+            <input name="lastName" type="text" placeholder="Last Name" />
+          </>
+        )}
+
         <input name="email" type="text" placeholder="email" />
         <input name="password" type="password" placeholder="password" />
 

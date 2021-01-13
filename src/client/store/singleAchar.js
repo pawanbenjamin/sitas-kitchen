@@ -26,7 +26,6 @@ export const fetchAchar = (id) => async (dispatch) => {
     if (data === null) {
       dispatch(gotAchar({}));
     } else {
-      console.log(data);
       dispatch(gotAchar(data));
     }
   } catch (error) {
@@ -52,13 +51,13 @@ export const updateTheAchar = (achar) => async (dispatch) => {
   }
 };
 
-export const clearAchar = () => async(dispatch) => {
+export const clearAchar = () => async (dispatch) => {
   try {
-    dispatch(updateAchar({}))
+    dispatch(updateAchar({}));
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
-}
+};
 
 export default function (state = {}, action) {
   switch (action.type) {

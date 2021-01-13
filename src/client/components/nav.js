@@ -5,9 +5,9 @@ import { logout } from "../store/user";
 
 const Nav = ({ isLoggedIn, handleClick }) => {
   return (
-    <div className="nav">
+    <div>
       {isLoggedIn ? (
-        <div>
+        <div className="nav">
           <Link to="/">Home</Link>
           <Link to="/achars">All Achars</Link>
           <a href="/" onClick={handleClick}>
@@ -15,10 +15,11 @@ const Nav = ({ isLoggedIn, handleClick }) => {
           </a>
         </div>
       ) : (
-        <div>
+        <div className="nav">
           <Link to="/">Home</Link>
           <Link to="/achars">All Achars</Link>
           <Link to="/signUp">Sign Up</Link>
+          <Link to="/login">Log In</Link>
         </div>
       )}
     </div>
