@@ -1,11 +1,13 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { auth } from "../store/user";
+import Button from "@material-ui/core/Button";
 
 // follow auth-form component
 
-const AuthForm = (props) => {
+const AuthForm = (props, { history }) => {
   const { name, displayName, handleSubmit, error } = props;
 
   return (
@@ -16,7 +18,10 @@ const AuthForm = (props) => {
         <input name="lastName" type="text" placeholder="Last Name" />
         <input name="email" type="text" placeholder="email" />
         <input name="password" type="password" placeholder="password" />
-        <button type="submit">{displayName}</button>
+
+        <Button variant="contained" type="submit">
+          {displayName}
+        </Button>
         {error && error.response && <div>{error.response.data}</div>}
       </form>
     </div>
@@ -50,8 +55,8 @@ const mapDispatch = (dispatch) => {
   };
 };
 
-export const Login = connect(mapLogin, mapDispatch)(AuthForm);
-export const SignUp = connect(mapSignup, mapDispatch)(AuthForm);
+export const Login = withRouter(connect(mapLogin, mapDispatch)(AuthForm));
+export const SignUp = withRouter(connect(mapSignup, mapDispatch)(AuthForm));
 
 AuthForm.propTypes = {
   name: PropTypes.string.isRequired,

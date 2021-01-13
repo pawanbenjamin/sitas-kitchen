@@ -8,7 +8,7 @@ import history from "./history";
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={history}>
+    <Router>
       <App />
     </Router>
   </Provider>,
