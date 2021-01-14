@@ -49,13 +49,19 @@ const mapDispatch = (dispatch) => {
   return {
     handleSubmit(e) {
       e.preventDefault();
-      const formName = e.target.name;
-      const username = e.target.username.value;
-      const firstName = e.target.firstName.value;
-      const lastName = e.target.lastName.value;
-      const email = e.target.email.value;
-      const password = e.target.password.value;
-      dispatch(auth(username, firstName, lastName, email, password, formName));
+      if (e.target.username === undefined) {
+        const formName = e.target.name;
+        const email = e.target.email.value;
+        const password = e.target.password.value;
+        dispatch(auth("", "", "", email, password, formName));
+      } else {
+        const formName = e.target.name;
+        const username = e.target.username.value;
+        const firstName = e.target.firstName.value;
+        const lastName = e.target.lastName.value;
+        const email = e.target.email.value;
+        const password = e.target.password.value;
+      }
     },
   };
 };

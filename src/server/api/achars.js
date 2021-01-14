@@ -5,7 +5,11 @@ const Achar = require("../db/models/achar");
 
 router.get("/", async (req, res, next) => {
   try {
-    const achars = await Achar.findAll();
+    const achars = await Achar.findAll({
+      include: {
+        all: true,
+      },
+    });
     res.send(achars);
   } catch (error) {
     next(error);

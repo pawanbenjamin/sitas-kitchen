@@ -46,6 +46,10 @@ async function seed() {
   await Promise.all(achars.map((achar) => Achar.create(achar)));
   await Promise.all(users.map((user) => User.create(user)));
 
+  
+
+
+
   console.log(`seeded ${achars.length} achars`);
   console.log(`seeded successfully`);
 }

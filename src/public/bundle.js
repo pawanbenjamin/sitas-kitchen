@@ -7567,13 +7567,20 @@ var mapDispatch = function mapDispatch(dispatch) {
   return {
     handleSubmit: function handleSubmit(e) {
       e.preventDefault();
-      var formName = e.target.name;
-      var username = e.target.username.value;
-      var firstName = e.target.firstName.value;
-      var lastName = e.target.lastName.value;
-      var email = e.target.email.value;
-      var password = e.target.password.value;
-      dispatch((0,_store_user__WEBPACK_IMPORTED_MODULE_3__.auth)(username, firstName, lastName, email, password, formName));
+
+      if (e.target.username === undefined) {
+        var formName = e.target.name;
+        var email = e.target.email.value;
+        var password = e.target.password.value;
+        dispatch((0,_store_user__WEBPACK_IMPORTED_MODULE_3__.auth)("", "", "", email, password, formName));
+      } else {
+        var _formName = e.target.name;
+        var username = e.target.username.value;
+        var firstName = e.target.firstName.value;
+        var lastName = e.target.lastName.value;
+        var _email = e.target.email.value;
+        var _password = e.target.password.value;
+      }
     }
   };
 };
