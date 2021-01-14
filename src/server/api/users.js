@@ -24,4 +24,31 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
+router.get("/:id/orders", async (req, res, next) => {
+  try {
+    const orders = await Order.findAll({
+      where: {
+        userId: req.params.id,
+      },
+    });
+    res.send(orders);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/:id/cart", async (req, res, next) => {
+  try {
+    const cart = await Order.findAll({
+      where: {
+        userId: req.params.id,
+        isComplete: false,
+      },
+    });
+    res.send(cart[0]);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;

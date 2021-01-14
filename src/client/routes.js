@@ -5,6 +5,7 @@ import Achars from "./components/achars";
 import Home from "./components/home";
 import SingleAchar from "./components/singleAchar";
 import addAchar from "./components/addAchar";
+import Cart from "./components/cart";
 import { SignUp, Login } from "./components/authForm";
 import { me } from "./store/user";
 
@@ -17,6 +18,7 @@ const Routes = (props) => {
 
   return (
     <Switch>
+      <Route path="/cart" component={Cart} />
       <Route path="/login" component={Login} />
       <Route exact path="/" component={Home} />
       <Route exact path="/achars" component={Achars} />

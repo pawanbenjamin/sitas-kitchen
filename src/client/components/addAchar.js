@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { addAnAchar } from "../store/achars";
+import { addAnAchar, fetchAchars } from "../store/achars";
 
 class AddAchar extends React.Component {
   constructor() {
@@ -26,6 +26,7 @@ class AddAchar extends React.Component {
       stockQty,
       imageUrl,
     });
+    await this.props.getAchars();
     const form = document.getElementById("addAchar");
     form.reset();
   }
@@ -62,6 +63,7 @@ const mapState = (state) => ({
 
 const mapDispatch = (dispatch) => ({
   addAchar: (achar) => dispatch(addAnAchar(achar)),
+  getAchars: () => dispatch(fetchAchars()),
 });
 
 export default connect(mapState, mapDispatch)(AddAchar);

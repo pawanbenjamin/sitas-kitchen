@@ -13,6 +13,7 @@ const Nav = ({ isLoggedIn, handleClick }) => {
           <a href="/" onClick={handleClick}>
             Logout
           </a>
+          <Link to="/cart">Cart</Link>
         </div>
       ) : (
         <div className="nav">
@@ -20,6 +21,7 @@ const Nav = ({ isLoggedIn, handleClick }) => {
           <Link to="/achars">All Achars</Link>
           <Link to="/signUp">Sign Up</Link>
           <Link to="/login">Log In</Link>
+          <Link to="/cart">Cart</Link>
         </div>
       )}
     </div>

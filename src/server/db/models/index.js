@@ -10,7 +10,7 @@ User.hasMany(Order);
 Order.belongsTo(User);
 
 // Many to Many
-Order.belongsToMany(Achar, { through: Achar_Order });
+Order.hasMany(Achar);
 Achar.belongsToMany(Order, { through: Achar_Order });
 
 // Export all models in object
