@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { withRouter, Link } from "react-router-dom";
+import { withRouter} from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { auth } from "../store/user";
