@@ -59,9 +59,11 @@ class SingleAchar extends React.Component {
           <div>
             <img src={achar.imageUrl} height={150} width={150} />
             <h3>{achar.name}</h3>
+            <button onClick={this.handleAdd}>Add to Cart</button>
             <p>{achar.description}</p>
             <h4>Price: ${achar.price / 100}</h4>
             <button onClick={this.handleDelete}>Delete from DB</button>
+
             <UpdateAchar handleSubmit={this.handleSubmit} />
           </div>
         )}

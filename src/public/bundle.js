@@ -7526,7 +7526,8 @@ var AuthForm = function AuthForm(props) {
       handleSubmit = props.handleSubmit,
       error = props.error,
       user = props.user;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+  console.log(user);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, user.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Welcome ", user.username) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
     onSubmit: handleSubmit,
     name: name
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
@@ -7557,6 +7558,7 @@ var AuthForm = function AuthForm(props) {
 
 var mapLogin = function mapLogin(state) {
   return {
+    user: state.user,
     name: "login",
     displayName: "Login",
     error: state.user.error
@@ -7565,6 +7567,7 @@ var mapLogin = function mapLogin(state) {
 
 var mapSignup = function mapSignup(state) {
   return {
+    user: state.user,
     name: "signup",
     displayName: "Sign Up",
     error: state.user.error
@@ -7950,7 +7953,9 @@ var SingleAchar = /*#__PURE__*/function (_React$Component) {
         src: achar.imageUrl,
         height: 150,
         width: 150
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, achar.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, achar.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Price: $", achar.price / 100), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, achar.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        onClick: this.handleAdd
+      }, "Add to Cart"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, achar.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Price: $", achar.price / 100), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         onClick: this.handleDelete
       }, "Delete from DB"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_updateAchar__WEBPACK_IMPORTED_MODULE_3__.default, {
         handleSubmit: this.handleSubmit

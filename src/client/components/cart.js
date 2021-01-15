@@ -11,6 +11,7 @@ class Cart extends React.Component {
     return (
       <div>
         <h3>The Cart</h3>
+        
       </div>
     );
   }

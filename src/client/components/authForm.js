@@ -1,5 +1,5 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { auth } from "../store/user";
@@ -10,30 +10,38 @@ import Button from "@material-ui/core/Button";
 const AuthForm = (props) => {
   const { name, displayName, handleSubmit, error, user } = props;
 
+  console.log(user);
+
   return (
     <div>
-      <form onSubmit={handleSubmit} name={name}>
-        <input name="username" type="text" placeholder="User-Name" />
-        <input name="firstName" type="text" placeholder="First Name" />
-        <input name="lastName" type="text" placeholder="Last Name" />
-        <input name="email" type="text" placeholder="email" />
-        <input name="password" type="password" placeholder="password" />
-        <Button variant="contained" type="submit">
-          {displayName}
-        </Button>
-        {error && error.response && <div>{error.response.data}</div>}
-      </form>
+      {user.id ? (
+        <h3>Welcome {user.username}</h3>
+      ) : (
+        <form onSubmit={handleSubmit} name={name}>
+          <input name="username" type="text" placeholder="User-Name" />
+          <input name="firstName" type="text" placeholder="First Name" />
+          <input name="lastName" type="text" placeholder="Last Name" />
+          <input name="email" type="text" placeholder="email" />
+          <input name="password" type="password" placeholder="password" />
+          <Button variant="contained" type="submit">
+            {displayName}
+          </Button>
+          {error && error.response && <div>{error.response.data}</div>}
+        </form>
+      )}
     </div>
   );
 };
 
 const mapLogin = (state) => ({
+  user: state.user,
   name: "login",
   displayName: "Login",
   error: state.user.error,
 });
 
 const mapSignup = (state) => ({
+  user: state.user,
   name: "signup",
   displayName: "Sign Up",
   error: state.user.error,

@@ -1,6 +1,5 @@
 const router = require("express").Router();
-const { User } = require("../db/models");
-const { Order } = require("../db/models");
+const { User, Achar, Order } = require("../db/models");
 
 router.get("/", async (req, res, next) => {
   try {
@@ -43,6 +42,9 @@ router.get("/:id/cart", async (req, res, next) => {
       where: {
         userId: req.params.id,
         isComplete: false,
+      },
+      include: {
+        model: Achar,
       },
     });
     res.send(cart[0]);
