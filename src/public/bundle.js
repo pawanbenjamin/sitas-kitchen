@@ -7632,6 +7632,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _store_cart__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/cart */ "./src/client/store/cart.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -7655,7 +7656,8 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 
- // import { fetchCart } from "../store/cart";
+
+
 
 var Cart = /*#__PURE__*/function (_React$Component) {
   _inherits(Cart, _React$Component);
@@ -7670,12 +7672,16 @@ var Cart = /*#__PURE__*/function (_React$Component) {
 
   _createClass(Cart, [{
     key: "componentDidMount",
-    value: function componentDidMount() {// this.props.getCart(this.props.user.id);
+    value: function componentDidMount() {
+      this.props.getCart(this.props.user.id);
     }
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "The Cart"));
+      var achars = this.props.cart.achars;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "The Cart"), achars !== undefined ? achars.map(function (achar) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, achar.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "$", achar.price));
+      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Your cart is Empty!"));
     }
   }]);
 
@@ -7684,14 +7690,20 @@ var Cart = /*#__PURE__*/function (_React$Component) {
 
 var mapState = function mapState(state) {
   return {
-    user: state.user
+    user: state.user,
+    cart: state.cart
   };
-}; // const mapDispatch = (dispatch) => ({
-//   getCart: (id) => dispatch(fetchCart(id)),
-// });
+};
 
+var mapDispatch = function mapDispatch(dispatch) {
+  return {
+    getCart: function getCart(id) {
+      return dispatch((0,_store_cart__WEBPACK_IMPORTED_MODULE_2__.fetchCart)(id));
+    }
+  };
+};
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapState, null)(Cart));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapState, mapDispatch)(Cart));
 
 /***/ }),
 
@@ -7854,6 +7866,7 @@ var SingleAchar = /*#__PURE__*/function (_React$Component) {
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.handleDelete = _this.handleDelete.bind(_assertThisInitialized(_this));
+    _this.handleAdd = _this.handleAdd.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -7947,6 +7960,31 @@ var SingleAchar = /*#__PURE__*/function (_React$Component) {
       return handleDelete;
     }()
   }, {
+    key: "handleAdd",
+    value: function () {
+      var _handleAdd = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(e) {
+        return regeneratorRuntime.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                e.preventDefault();
+                console.log(this.props.cart);
+
+              case 2:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this);
+      }));
+
+      function handleAdd(_x3) {
+        return _handleAdd.apply(this, arguments);
+      }
+
+      return handleAdd;
+    }()
+  }, {
     key: "render",
     value: function render() {
       var achar = this.props.achar;
@@ -7971,7 +8009,8 @@ var SingleAchar = /*#__PURE__*/function (_React$Component) {
 
 var mapState = function mapState(state) {
   return {
-    achar: state.singleAchar
+    achar: state.singleAchar,
+    cart: state.cart
   };
 };
 
@@ -8369,18 +8408,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 var GET_CART = "GET_CART";
-var CREATE_CART = "CREATE_CART";
 
 var gotCart = function gotCart(cart) {
   return {
     type: GET_CART,
-    cart: cart
-  };
-};
-
-var makeCart = function makeCart(cart) {
-  return {
-    type: CREATE_CART,
     cart: cart
   };
 };

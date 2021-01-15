@@ -13,6 +13,7 @@ class SingleAchar extends React.Component {
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleAdd = this.handleAdd.bind(this);
   }
 
   componentDidMount() {
@@ -49,6 +50,11 @@ class SingleAchar extends React.Component {
     });
   }
 
+  async handleAdd(e) {
+    e.preventDefault();
+    console.log(this.props.cart);
+  }
+
   render() {
     const { achar } = this.props;
     return (
@@ -74,6 +80,7 @@ class SingleAchar extends React.Component {
 
 const mapState = (state) => ({
   achar: state.singleAchar,
+  cart: state.cart,
 });
 
 const mapDispatch = (dispatch) => ({

@@ -1,15 +1,9 @@
 import axios from "axios";
 
 const GET_CART = "GET_CART";
-const CREATE_CART = "CREATE_CART";
 
 const gotCart = (cart) => ({
   type: GET_CART,
-  cart,
-});
-
-const makeCart = (cart) => ({
-  type: CREATE_CART,
   cart,
 });
 
