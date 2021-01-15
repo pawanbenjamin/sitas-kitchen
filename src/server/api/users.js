@@ -38,7 +38,7 @@ router.get("/:id/orders", async (req, res, next) => {
 
 router.get("/:id/cart", async (req, res, next) => {
   try {
-    const cart = await Order.findAll({
+    const cart = await Order.findOrCreate({
       where: {
         userId: req.params.id,
         isComplete: false,

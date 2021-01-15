@@ -1,16 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { withRouter, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { auth } from "../store/user";
+import { fetchCart } from "../store/cart";
 import Button from "@material-ui/core/Button";
 
 // follow auth-form component
 
 const AuthForm = (props) => {
-  const { name, displayName, handleSubmit, error, user } = props;
+  const { name, displayName, handleSubmit, error, user, getCart } = props;
 
   console.log(user);
+
+  useEffect(() => {
+    if (user.id) {
+      getCart(user.id);
+    }
+  }, [user]);
 
   return (
     <div>
@@ -56,6 +63,7 @@ const mapDispatch = (dispatch) => {
         const email = e.target.email.value;
         const password = e.target.password.value;
         dispatch(auth("", "", "", email, password, formName));
+        // await dispatch(fetchCart(user.id));
       } else {
         const formName = e.target.name;
         const username = e.target.username.value;
@@ -66,7 +74,11 @@ const mapDispatch = (dispatch) => {
         dispatch(
           auth(username, firstName, lastName, email, password, formName)
         );
+        // await dispatch(fetchCart(user.id));
       }
+    },
+    getCart(id) {
+      dispatch(fetchCart(id));
     },
   };
 };
