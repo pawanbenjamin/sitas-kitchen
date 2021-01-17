@@ -7,6 +7,9 @@ module.exports = {
     filename: "bundle.js",
   },
   mode: "production",
+  production: {
+    use_env_variable: "DATABASE_URL",
+  },
   module: {
     rules: [
       {
