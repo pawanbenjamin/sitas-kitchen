@@ -6,7 +6,8 @@
   "scripts": {
     "build": "webpack",
     "dev": "(nodemon src/server) & npm run build",
-    "start": "(node src/server) & npm run build"
+    "start": "node src/server",
+    "heroku-postbuild": "echo Skip build on Heroku"
   },
   "keywords": [],
   "author": "",
@@ -46,5 +47,6 @@
     "sequelize": "^6.3.5",
     "sequelize-cli": "^6.2.0",
     "source-map-loader": "^1.1.3"
-  }
+  },
+  "heroku-run-build-script": true
 }
