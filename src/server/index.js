@@ -7,6 +7,7 @@ const db = require("./db");
 const sessionStore = new SequelizeStore({ db });
 const dotenv = require("dotenv");
 const passport = require("passport");
+const PORT = process.env.PORT || 3000;
 
 dotenv.config();
 
@@ -74,7 +75,7 @@ const createApp = () => {
 };
 
 const startListening = () => {
-  const server = app.listen(3000, () => {
+  const server = app.listen(PORT, () => {
     console.log(`listening on port 3000!`);
   });
   // could set up socket server here
