@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
-    "start-dev": "(nodemon src/server) & npm run build"
+    "start-dev": "(nodemon src/server) & npm run build",
+    "start": "node src/server & npm run build"
   },
   "keywords": [],
   "author": "",
