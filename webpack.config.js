@@ -6,7 +6,7 @@ module.exports = {
     path: path.resolve(__dirname, "src", "public"),
     filename: "bundle.js",
   },
-  mode: "production",
+  mode: "development",
   module: {
     rules: [
       {
@@ -17,5 +17,5 @@ module.exports = {
     ],
   },
   devtool: "source-map",
-  // watch: true,
+  watch: true,
 };
