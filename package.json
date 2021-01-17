@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack",
     "start-dev": "(nodemon src/server) & npm run build",
-    "start": "(node src/server) & npm run build"
+    "start": "(node src/server) & webpack -p"
   },
   "keywords": [],
   "author": "",
