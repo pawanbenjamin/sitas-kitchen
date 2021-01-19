@@ -10,7 +10,7 @@ class Cart extends React.Component {
   render() {
     let achars = this.props.cart.achars;
     return (
-      <div>
+      <div className="cart">
         <h3>The Cart</h3>
         {achars !== undefined ? (
           achars.map((achar) => (

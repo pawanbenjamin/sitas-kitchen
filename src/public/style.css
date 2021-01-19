@@ -1,22 +1,75 @@
 body {
-  background: green;
+  background: url(parchment.jpg) no-repeat fixed center;
   display: flex;
-  justify-content: center;
+  height: 100%;
+  width: 100%;
+  color: sienna;
+}
+
+.header {
+  width: 100%;
+}
+
+.app {
+  display: flex;
+  width: 100%;
+  justify-content: stretch;
+  flex-direction: column;
 }
 
 .nav {
+  background: url(parchment.jpg) no-repeat fixed center;
+  box-shadow: 10px 10px 5px grey;
   display: flex;
-  width: 400px;
-  background-color: chartreuse;
+  flex-grow: 4;
+  height: 4em;
   justify-content: space-evenly;
-  border-radius: 25px;
+  width: 100%;
+  background-color: chartreuse;
+  opacity: 0.7;
+}
+
+.nav > a {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  display: flex;
+  color: rgb(8, 12, 9);
+  margin-top: 1em;
+}
+
+a {
 }
 
 .achars {
+  justify-content: space-evenly;
+
+  height: 80%;
+  opacity: 0.95;
   text-align: center;
   display: flex;
-  justify-content: center;
+  margin-top: 2em;
+  margin-right: 12em;
+  margin-left: 12em;
+  margin-bottom: 2em;
   flex-direction: column;
+  box-shadow: black;
+}
+
+.cart {
+  justify-content: space-evenly;
+  background: url(parchment.jpg);
+  opacity: 0.95;
+  text-align: center;
+  display: flex;
+  margin-top: 2em;
+  margin-right: 12em;
+  margin-left: 12em;
+  margin-bottom: 2em;
+  flex-direction: column;
+  box-shadow: black;
+}
+
+.home {
 }
 
 .updateAchar {
@@ -28,12 +81,23 @@ body {
 }
 
 .singleAchar {
-  margin-top: 5em;
+  color: beige;
+  box-shadow: 10px 10px 5px grey;
+  justify-content: space-around;
+  background: url(Nepali\ Pattern.jpg);
+  background-size: 120%;
+  margin-top: 2em;
   align-items: center;
   text-align: center;
   display: flex;
   justify-content: center;
   flex-direction: column;
+  margin-right: 25%;
+  margin-left: 25%;
+}
+
+img {
+  margin-top: 4em;
 }
 
 .home {
@@ -56,6 +120,8 @@ form {
   align-items: center;
   text-align: center;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   flex-direction: column;
+  margin-top: 4em;
+  margin-bottom: 2em;
 }

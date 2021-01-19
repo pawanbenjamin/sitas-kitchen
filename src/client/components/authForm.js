@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { withRouter} from "react-router-dom";
+import { Redirect, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { auth } from "../store/user";
@@ -22,7 +22,7 @@ const AuthForm = (props) => {
   return (
     <div>
       {user.id ? (
-        <h3>Welcome {user.username}</h3>
+        <Redirect to="/"></Redirect>
       ) : (
         <form onSubmit={handleSubmit} name={name}>
           <input name="username" type="text" placeholder="User-Name" />

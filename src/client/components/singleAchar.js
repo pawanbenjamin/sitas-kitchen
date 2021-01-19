@@ -58,11 +58,11 @@ class SingleAchar extends React.Component {
   render() {
     const { achar } = this.props;
     return (
-      <div className="singleAchar">
+      <div>
         {this.state.isDeleted ? (
-          <h3>No Product!</h3>
+          <h3 className="singleAchar">No Product!</h3>
         ) : (
-          <div>
+          <div className="singleAchar">
             <img src={achar.imageUrl} height={150} width={150} />
             <h3>{achar.name}</h3>
             <button onClick={this.handleAdd}>Add to Cart</button>
