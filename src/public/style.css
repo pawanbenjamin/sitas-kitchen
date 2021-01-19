@@ -37,9 +37,6 @@ body {
   margin-top: 1em;
 }
 
-a {
-}
-
 .achars {
   justify-content: space-evenly;
 
@@ -67,9 +64,6 @@ a {
   margin-bottom: 2em;
   flex-direction: column;
   box-shadow: black;
-}
-
-.home {
 }
 
 .updateAchar {
