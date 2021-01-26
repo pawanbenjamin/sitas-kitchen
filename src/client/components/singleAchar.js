@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { fetchAchar } from "../store/singleAchar";
 import { deleteTheAchar, updateTheAchar } from "../store/singleAchar";
+import { addToCart, fetchCart } from "../store/cart";
 
 import UpdateAchar from "./updateAchar";
 
@@ -52,7 +53,11 @@ class SingleAchar extends React.Component {
 
   async handleAdd(e) {
     e.preventDefault();
-    console.log(this.props.cart);
+    console.log(this.props);
+    if (!this.props.cart.id) {
+      await this.props.getCart(this.props.user.id);
+    }
+    await this.props.addToTheCart(this.props.achar.id, this.props.cart.id);
   }
 
   render() {
@@ -81,12 +86,15 @@ class SingleAchar extends React.Component {
 const mapState = (state) => ({
   achar: state.singleAchar,
   cart: state.cart,
+  user: state.user,
 });
 
 const mapDispatch = (dispatch) => ({
+  getCart: (id) => dispatch(fetchCart(id)),
   getAchar: (id) => dispatch(fetchAchar(id)),
   deleteAchar: (id) => dispatch(deleteTheAchar(id)),
   updateAchar: (achar) => dispatch(updateTheAchar(achar)),
+  addToTheCart: (acharId, orderId) => dispatch(addToCart(acharId, orderId)),
 });
 
 export default connect(mapState, mapDispatch)(SingleAchar);

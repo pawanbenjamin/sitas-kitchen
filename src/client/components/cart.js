@@ -14,7 +14,7 @@ class Cart extends React.Component {
         <h3>The Cart</h3>
         {achars !== undefined ? (
           achars.map((achar) => (
-            <ul>
+            <ul key={achar.id}>
               <li>{achar.name}</li>
               <li>${achar.price}</li>
             </ul>

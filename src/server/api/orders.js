@@ -23,4 +23,14 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
+router.put("/:id", async (req, res, next) => {
+  try {
+    const cart = await Order.findByPk(req.params.id);
+    const updatedCart = await cart.update(req.body);
+    res.json(updatedCart);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;

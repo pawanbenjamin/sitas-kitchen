@@ -53,4 +53,20 @@ router.get("/:id/cart", async (req, res, next) => {
   }
 });
 
+router.put("/:id/cart/addToCart", async (req, res, next) => {
+  try {
+    const cart = await Order.findOrCreate({
+      where: {
+        userId: req.params.id,
+        isComplete: false,
+      },
+      include: {
+        model: Achar,
+      },
+    });
+    const updatedCart = await cart.update(req.body);
+    res.json(updatedCart);
+  } catch (error) {}
+});
+
 module.exports = router;

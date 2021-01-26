@@ -7688,7 +7688,9 @@ var Cart = /*#__PURE__*/function (_React$Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "cart"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "The Cart"), achars !== undefined ? achars.map(function (achar) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, achar.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "$", achar.price));
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+          key: achar.id
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, achar.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "$", achar.price));
       }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Your cart is Empty!"));
     }
   }]);
@@ -7825,7 +7827,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _store_singleAchar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/singleAchar */ "./src/client/store/singleAchar.js");
-/* harmony import */ var _updateAchar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./updateAchar */ "./src/client/components/updateAchar.js");
+/* harmony import */ var _store_cart__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../store/cart */ "./src/client/store/cart.js");
+/* harmony import */ var _updateAchar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./updateAchar */ "./src/client/components/updateAchar.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -7851,6 +7854,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 
 
 
@@ -7976,9 +7980,21 @@ var SingleAchar = /*#__PURE__*/function (_React$Component) {
             switch (_context3.prev = _context3.next) {
               case 0:
                 e.preventDefault();
-                console.log(this.props.cart);
+                console.log(this.props);
 
-              case 2:
+                if (this.props.cart.id) {
+                  _context3.next = 5;
+                  break;
+                }
+
+                _context3.next = 5;
+                return this.props.getCart(this.props.user.id);
+
+              case 5:
+                _context3.next = 7;
+                return this.props.addToTheCart(this.props.achar.id, this.props.cart.id);
+
+              case 7:
               case "end":
                 return _context3.stop();
             }
@@ -8008,7 +8024,7 @@ var SingleAchar = /*#__PURE__*/function (_React$Component) {
         onClick: this.handleAdd
       }, "Add to Cart"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, achar.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Price: $", achar.price / 100), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         onClick: this.handleDelete
-      }, "Delete from DB"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_updateAchar__WEBPACK_IMPORTED_MODULE_3__.default, {
+      }, "Delete from DB"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_updateAchar__WEBPACK_IMPORTED_MODULE_4__.default, {
         handleSubmit: this.handleSubmit
       })));
     }
@@ -8020,12 +8036,16 @@ var SingleAchar = /*#__PURE__*/function (_React$Component) {
 var mapState = function mapState(state) {
   return {
     achar: state.singleAchar,
-    cart: state.cart
+    cart: state.cart,
+    user: state.user
   };
 };
 
 var mapDispatch = function mapDispatch(dispatch) {
   return {
+    getCart: function getCart(id) {
+      return dispatch((0,_store_cart__WEBPACK_IMPORTED_MODULE_3__.fetchCart)(id));
+    },
     getAchar: function getAchar(id) {
       return dispatch((0,_store_singleAchar__WEBPACK_IMPORTED_MODULE_2__.fetchAchar)(id));
     },
@@ -8034,6 +8054,9 @@ var mapDispatch = function mapDispatch(dispatch) {
     },
     updateAchar: function updateAchar(achar) {
       return dispatch((0,_store_singleAchar__WEBPACK_IMPORTED_MODULE_2__.updateTheAchar)(achar));
+    },
+    addToTheCart: function addToTheCart(acharId, orderId) {
+      return dispatch((0,_store_cart__WEBPACK_IMPORTED_MODULE_3__.addToCart)(acharId, orderId));
     }
   };
 };
@@ -8407,6 +8430,7 @@ var addAnAchar = function addAnAchar(achar) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "fetchCart": () => /* binding */ fetchCart,
+/* harmony export */   "addToCart": () => /* binding */ addToCart,
 /* harmony export */   "default": () => /* export default binding */ __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
@@ -8416,14 +8440,18 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 
-var GET_CART = "GET_CART";
+var GET_CART = "GET_CART"; // const ADD_ACHAR = "ADD_ACHAR"
 
 var gotCart = function gotCart(cart) {
   return {
     type: GET_CART,
     cart: cart
   };
-};
+}; // const addAchar = (achar) => ({
+//   type: ADD_ACHAR,
+//   achar
+// })
+
 
 var fetchCart = function fetchCart(id) {
   return /*#__PURE__*/function () {
@@ -8460,6 +8488,49 @@ var fetchCart = function fetchCart(id) {
 
     return function (_x) {
       return _ref.apply(this, arguments);
+    };
+  }();
+};
+var addToCart = function addToCart(acharId, orderId) {
+  return /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(dispatch) {
+      var cart;
+      return regeneratorRuntime.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.prev = 0;
+              _context2.next = 3;
+              return axios__WEBPACK_IMPORTED_MODULE_0___default().put("/api/achar_order", {
+                acharId: acharId,
+                orderId: orderId
+              });
+
+            case 3:
+              _context2.next = 5;
+              return axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/orders/".concat(orderId));
+
+            case 5:
+              cart = _context2.sent;
+              dispatch(gotCart(cart));
+              _context2.next = 12;
+              break;
+
+            case 9:
+              _context2.prev = 9;
+              _context2.t0 = _context2["catch"](0);
+              console.error(_context2.t0);
+
+            case 12:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2, null, [[0, 9]]);
+    }));
+
+    return function (_x2) {
+      return _ref2.apply(this, arguments);
     };
   }();
 };

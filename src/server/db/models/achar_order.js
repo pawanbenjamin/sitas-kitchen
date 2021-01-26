@@ -1,6 +1,5 @@
 const db = require("../index");
 const Sequelize = require("sequelize");
-const { Op } = require("sequelize");
 
 const Achar_Order = db.define("Achar_Order", {
   qty: {
@@ -9,4 +8,4 @@ const Achar_Order = db.define("Achar_Order", {
   historicalPrice: Sequelize.INTEGER,
 });
 
-module.exports = Achar_Order
+module.exports = Achar_Order;
