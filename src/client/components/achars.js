@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, withRouter } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchAchars } from "../store/achars";
 import { deleteTheAchar, clearAchar } from "../store/singleAchar";
@@ -13,10 +13,13 @@ import {
   Typography,
   Button,
 } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+
+import { makeStyles} from "@material-ui/core/styles";
+
 const useStyles = makeStyles({
   root: {
-    maxWidth: 150,
+    maxWidth: 100,
+    disableRipple: true,
   },
   media: {
     height: 100,
@@ -32,6 +35,7 @@ class Achars extends React.Component {
   componentDidMount() {
     this.props.getAchars();
     this.props.clearSingle();
+    const classes = useStyles();
   }
 
   async handleDelete(e) {
@@ -41,33 +45,30 @@ class Achars extends React.Component {
   }
 
   render() {
-    const classes = useStyles;
     console.log(this.props.achars);
     return (
-      <div className="achars">
+      <>
         <Typography>All the Achars</Typography>
         {this.props.achars
           ? this.props.achars.map((achar) => (
-              <div key={achar.id} className="card">
-                <Card className={classes.root}>
-                  <CardActionArea>
-                    <CardMedia
-                      className={classes.media}
-                      image={achar.imageUrl}
-                      style={{ height: 0, width: "30 vw", paddingTop: "55%" }}
-                    />
-                    <CardContent>
-                      <Typography>{achar.name}</Typography>
-                      <Typography>{`$${achar.price / 100}`}</Typography>
-                      <Link to={`/achars/${achar.id}`}>View</Link>
-                    </CardContent>
-                  </CardActionArea>
-                </Card>
-              </div>
+              <Card className={classes.root}>
+                <CardActionArea>
+                  <CardMedia className={classes.media} image={achar.imageUrl} />
+                  <CardContent>
+                    <Typography>{achar.name}</Typography>
+                    <Typography>{`$${achar.price / 100}`}</Typography>
+                  </CardContent>
+                  <CardActions>
+                    <Button component={Link} to={`/achars/${achar.id}`}>
+                      Details
+                    </Button>
+                  </CardActions>
+                </CardActionArea>
+              </Card>
             ))
           : null}
         <div>{this.props.user.isAdmin ? <AddAchar /> : null}</div>
-      </div>
+      </>
     );
   }
 }
