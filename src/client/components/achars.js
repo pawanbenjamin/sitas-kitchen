@@ -4,6 +4,24 @@ import { connect } from "react-redux";
 import { fetchAchars } from "../store/achars";
 import { deleteTheAchar, clearAchar } from "../store/singleAchar";
 import AddAchar from "./addAchar";
+import {
+  Card,
+  CardActionArea,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Typography,
+  Button,
+} from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+const useStyles = makeStyles({
+  root: {
+    maxWidth: 150,
+  },
+  media: {
+    height: 100,
+  },
+});
 
 class Achars extends React.Component {
   constructor() {
@@ -23,17 +41,28 @@ class Achars extends React.Component {
   }
 
   render() {
+    const classes = useStyles;
+    console.log(this.props.achars);
     return (
       <div className="achars">
-        <h3>All the Achars</h3>
+        <Typography>All the Achars</Typography>
         {this.props.achars
           ? this.props.achars.map((achar) => (
-              <div key={achar.id}>
-                <h3>{achar.name}</h3>
-                <Link to={`/achars/${achar.id}`}>View</Link>
-                {/* <button id={achar.id} onClick={this.handleDelete}>
-                  Delete from DB
-                </button> */}
+              <div key={achar.id} className="card">
+                <Card className={classes.root}>
+                  <CardActionArea>
+                    <CardMedia
+                      className={classes.media}
+                      image={achar.imageUrl}
+                      style={{ height: 0, width: "30 vw", paddingTop: "55%" }}
+                    />
+                    <CardContent>
+                      <Typography>{achar.name}</Typography>
+                      <Typography>{`$${achar.price / 100}`}</Typography>
+                      <Link to={`/achars/${achar.id}`}>View</Link>
+                    </CardContent>
+                  </CardActionArea>
+                </Card>
               </div>
             ))
           : null}

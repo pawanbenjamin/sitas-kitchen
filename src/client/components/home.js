@@ -1,11 +1,11 @@
+import { Typography } from "@material-ui/core";
 import React from "react";
 import { Link } from "react-router-dom";
-
 
 const Home = () => {
   return (
     <div className="home">
-      <h3>Welcome to Sita's Kitchen</h3>
+      <Typography>Hi!</Typography>
       <Link to="/achars">Achars</Link>
     </div>
   );

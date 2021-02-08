@@ -39,7 +39,6 @@ body {
 
 .achars {
   justify-content: space-evenly;
-
   height: 80%;
   opacity: 0.95;
   text-align: center;
@@ -118,4 +117,8 @@ form {
   flex-direction: column;
   margin-top: 4em;
   margin-bottom: 2em;
+}
+
+.card {
+  margin: 20px;
 }
