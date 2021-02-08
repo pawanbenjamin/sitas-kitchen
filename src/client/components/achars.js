@@ -15,7 +15,6 @@ import {
   Button,
 } from "@material-ui/core";
 
-import { makeStyles } from "@material-ui/core/styles";
 import { withStyles } from "@material-ui/styles";
 
 const styles = () => ({});
@@ -44,7 +43,11 @@ class Achars extends React.Component {
         <Typography className="desc">All the Achars</Typography>
         {this.props.achars
           ? this.props.achars.map((achar) => (
-              <Card key={achar.id} className="achar-card">
+              <Card
+                key={achar.id}
+                className="achar-card"
+                style={{ disableRipple: true }}
+              >
                 <CardActionArea>
                   <CardMedia
                     style={{ height: "100px", padding: "20px" }}

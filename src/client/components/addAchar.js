@@ -36,7 +36,7 @@ class AddAchar extends React.Component {
 
     return (
       <div className="addAchar">
-        <h3>Add an Achar!</h3>
+        <h3>Welcome Admin! Add and Achar:</h3>
         <form onSubmit={this.handleSubmit} id="addAchar">
           <label>Name:</label>
           <input name="name"></input>

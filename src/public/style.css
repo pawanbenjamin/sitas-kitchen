@@ -44,13 +44,6 @@ body {
   align-items: center;
 }
 
-/* .achars > .desc {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  padding: 30px;
-} */
-
 .achar-card {
   margin: 20px;
   width: 150px;

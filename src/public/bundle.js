@@ -4779,6 +4779,100 @@ if (true) {
 
 /***/ }),
 
+/***/ "./node_modules/@material-ui/styles/esm/ThemeProvider/ThemeProvider.js":
+/*!*****************************************************************************!*
+  !*** ./node_modules/@material-ui/styles/esm/ThemeProvider/ThemeProvider.js ***!
+  \*****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _material_ui_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/utils */ "./node_modules/@material-ui/utils/esm/exactProp.js");
+/* harmony import */ var _useTheme_ThemeContext__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../useTheme/ThemeContext */ "./node_modules/@material-ui/styles/esm/useTheme/ThemeContext.js");
+/* harmony import */ var _useTheme__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../useTheme */ "./node_modules/@material-ui/styles/esm/useTheme/useTheme.js");
+/* harmony import */ var _nested__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./nested */ "./node_modules/@material-ui/styles/esm/ThemeProvider/nested.js");
+
+
+
+
+
+
+ // To support composition of theme.
+
+function mergeOuterLocalTheme(outerTheme, localTheme) {
+  if (typeof localTheme === 'function') {
+    var mergedTheme = localTheme(outerTheme);
+
+    if (true) {
+      if (!mergedTheme) {
+        console.error(['Material-UI: You should return an object from your theme function, i.e.', '<ThemeProvider theme={() => ({})} />'].join('\n'));
+      }
+    }
+
+    return mergedTheme;
+  }
+
+  return (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, outerTheme, localTheme);
+}
+/**
+ * This component takes a `theme` prop.
+ * It makes the `theme` available down the React tree thanks to React context.
+ * This component should preferably be used at **the root of your component tree**.
+ */
+
+
+function ThemeProvider(props) {
+  var children = props.children,
+      localTheme = props.theme;
+  var outerTheme = (0,_useTheme__WEBPACK_IMPORTED_MODULE_3__.default)();
+
+  if (true) {
+    if (outerTheme === null && typeof localTheme === 'function') {
+      console.error(['Material-UI: You are providing a theme function prop to the ThemeProvider component:', '<ThemeProvider theme={outerTheme => outerTheme} />', '', 'However, no outer theme is present.', 'Make sure a theme is already injected higher in the React tree ' + 'or provide a theme object.'].join('\n'));
+    }
+  }
+
+  var theme = react__WEBPACK_IMPORTED_MODULE_1__.useMemo(function () {
+    var output = outerTheme === null ? localTheme : mergeOuterLocalTheme(outerTheme, localTheme);
+
+    if (output != null) {
+      output[_nested__WEBPACK_IMPORTED_MODULE_4__.default] = outerTheme !== null;
+    }
+
+    return output;
+  }, [localTheme, outerTheme]);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_useTheme_ThemeContext__WEBPACK_IMPORTED_MODULE_5__.default.Provider, {
+    value: theme
+  }, children);
+}
+
+ true ? ThemeProvider.propTypes = {
+  /**
+   * Your component tree.
+   */
+  children: (prop_types__WEBPACK_IMPORTED_MODULE_2___default().node.isRequired),
+
+  /**
+   * A theme object. You can provide a function to extend the outer theme.
+   */
+  theme: prop_types__WEBPACK_IMPORTED_MODULE_2___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_2___default().object), (prop_types__WEBPACK_IMPORTED_MODULE_2___default().func)]).isRequired
+} : 0;
+
+if (true) {
+   true ? ThemeProvider.propTypes = (0,_material_ui_utils__WEBPACK_IMPORTED_MODULE_6__.default)(ThemeProvider.propTypes) : 0;
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ThemeProvider);
+
+/***/ }),
+
 /***/ "./node_modules/@material-ui/styles/esm/ThemeProvider/nested.js":
 /*!**********************************************************************!*
   !*** ./node_modules/@material-ui/styles/esm/ThemeProvider/nested.js ***!
@@ -8068,18 +8162,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./routes */ "./src/client/routes.js");
 /* harmony import */ var _components_nav__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/nav */ "./src/client/components/nav.js");
+/* harmony import */ var _material_ui_styles__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/styles */ "./node_modules/@material-ui/styles/esm/ThemeProvider/ThemeProvider.js");
+/* harmony import */ var _components_theme__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/theme */ "./src/client/components/theme.js");
+
+
 
 
 
 
 var App = function App() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_material_ui_styles__WEBPACK_IMPORTED_MODULE_4__.default, {
+    theme: _components_theme__WEBPACK_IMPORTED_MODULE_3__.default
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "app"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_nav__WEBPACK_IMPORTED_MODULE_2__.default, {
     className: "header"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_routes__WEBPACK_IMPORTED_MODULE_1__.default, {
     className: "stomach"
-  }));
+  })));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);
@@ -8137,7 +8237,6 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
 
 
 
@@ -8215,7 +8314,10 @@ var Achars = /*#__PURE__*/function (_React$Component) {
       }, "All the Achars"), this.props.achars ? this.props.achars.map(function (achar) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__.default, {
           key: achar.id,
-          className: "achar-card"
+          className: "achar-card",
+          style: {
+            disableRipple: true
+          }
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__.default, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__.default, {
           style: {
             height: "100px",
@@ -8374,7 +8476,7 @@ var AddAchar = /*#__PURE__*/function (_React$Component) {
       console.log(this.props.user);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "addAchar"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Add an Achar!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Welcome Admin! Add and Achar:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
         onSubmit: this.handleSubmit,
         id: "addAchar"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, "Name:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
@@ -8455,11 +8557,6 @@ var AuthForm = function AuthForm(props) {
       user = props.user,
       getCart = props.getCart;
   console.log(user);
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    if (user.id) {
-      getCart(user.id);
-    }
-  }, [user]);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, user.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Redirect, {
     to: "/"
   }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
@@ -8553,91 +8650,9 @@ AuthForm.propTypes = {
 /*!***************************************!*
   !*** ./src/client/components/cart.js ***!
   \***************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ (() => {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _store_cart__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/cart */ "./src/client/store/cart.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-
-
-
-
-var Cart = /*#__PURE__*/function (_React$Component) {
-  _inherits(Cart, _React$Component);
-
-  var _super = _createSuper(Cart);
-
-  function Cart() {
-    _classCallCheck(this, Cart);
-
-    return _super.apply(this, arguments);
-  }
-
-  _createClass(Cart, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.props.getCart(this.props.user.id);
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var achars = this.props.cart.achars;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "cart"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "The Cart"), achars !== undefined ? achars.map(function (achar) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
-          key: achar.id
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, achar.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "$", achar.price));
-      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Your cart is Empty!"));
-    }
-  }]);
-
-  return Cart;
-}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
-
-var mapState = function mapState(state) {
-  return {
-    user: state.user,
-    cart: state.cart
-  };
-};
-
-var mapDispatch = function mapDispatch(dispatch) {
-  return {
-    getCart: function getCart(id) {
-      return dispatch((0,_store_cart__WEBPACK_IMPORTED_MODULE_2__.fetchCart)(id));
-    }
-  };
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapState, mapDispatch)(Cart));
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /Users/pawanbenjamin/Projects/sitas-kitchen/src/client/components/cart.js: Unexpected token (61:8)\n\n\u001b[0m \u001b[90m 59 | \u001b[39m        \u001b[0m\n\u001b[0m \u001b[90m 60 | \u001b[39m        \u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 61 | \u001b[39m        \u001b[33m:\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m    | \u001b[39m        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 62 | \u001b[39m        (\u001b[0m\n\u001b[0m \u001b[90m 63 | \u001b[39m          \u001b[33m<\u001b[39m\u001b[33mTypography\u001b[39m style\u001b[33m=\u001b[39m{{ textAlign\u001b[33m:\u001b[39m \u001b[32m\"center\"\u001b[39m }}\u001b[33m>\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 64 | \u001b[39m            \u001b[33mYour\u001b[39m cart is \u001b[33mEmpty\u001b[39m\u001b[33m!\u001b[39m\u001b[0m\n    at Object._raise (/Users/pawanbenjamin/Projects/sitas-kitchen/node_modules/@babel/parser/lib/index.js:748:17)\n    at Object.raiseWithData (/Users/pawanbenjamin/Projects/sitas-kitchen/node_modules/@babel/parser/lib/index.js:741:17)\n    at Object.raise (/Users/pawanbenjamin/Projects/sitas-kitchen/node_modules/@babel/parser/lib/index.js:735:17)\n    at Object.unexpected (/Users/pawanbenjamin/Projects/sitas-kitchen/node_modules/@babel/parser/lib/index.js:9097:16)\n    at Object.parseExprAtom (/Users/pawanbenjamin/Projects/sitas-kitchen/node_modules/@babel/parser/lib/index.js:10548:20)\n    at Object.parseExprAtom (/Users/pawanbenjamin/Projects/sitas-kitchen/node_modules/@babel/parser/lib/index.js:4759:20)\n    at Object.parseExprSubscripts (/Users/pawanbenjamin/Projects/sitas-kitchen/node_modules/@babel/parser/lib/index.js:10122:23)\n    at Object.parseUpdate (/Users/pawanbenjamin/Projects/sitas-kitchen/node_modules/@babel/parser/lib/index.js:10102:21)\n    at Object.parseMaybeUnary (/Users/pawanbenjamin/Projects/sitas-kitchen/node_modules/@babel/parser/lib/index.js:10091:17)\n    at Object.parseExprOps (/Users/pawanbenjamin/Projects/sitas-kitchen/node_modules/@babel/parser/lib/index.js:9961:23)");
 
 /***/ }),
 
@@ -8652,22 +8667,56 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Typography/Typography.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Typography/Typography.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _store_cart__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/cart */ "./src/client/store/cart.js");
 
 
 
 
-var Home = function Home() {
+
+
+var Home = function Home(props) {
+  var user = props.user,
+      getCart = props.getCart; // Get or Create DB cart if there is a user
+  // if no user, initialize window.localStogage cart
+
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (!user.id) {
+      // window local storage
+      console.log("No User");
+      var cart = {};
+      var stringCart = JSON.stringify(cart);
+      window.localStorage.setItem("cart", stringCart);
+    } else {
+      getCart(user.id);
+      console.log("The New User is:", user);
+    }
+  }, [user]);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "home"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__.default, null, "Welcome to Sita's Kitchen!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__.default, null, "Browse our Home-Made Achars, and more!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__.default, null, "Welcome to Sita's Kitchen!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__.default, null, "Browse our Home-Made Achars, and more!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
     to: "/achars"
   }, "Achars"));
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Home);
+var mapS = function mapS(state) {
+  return {
+    user: state.user
+  };
+};
+
+var mapD = function mapD(dispatch) {
+  return {
+    getCart: function getCart(id) {
+      return dispatch((0,_store_cart__WEBPACK_IMPORTED_MODULE_2__.fetchCart)(id));
+    }
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapS, mapD)(Home));
 
 /***/ }),
 
@@ -8906,6 +8955,7 @@ var SingleAchar = /*#__PURE__*/function (_React$Component) {
     key: "handleAdd",
     value: function () {
       var _handleAdd = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(e) {
+        var cart, stringedCart;
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
@@ -8913,19 +8963,38 @@ var SingleAchar = /*#__PURE__*/function (_React$Component) {
                 e.preventDefault();
                 console.log(this.props);
 
-                if (this.props.cart.id) {
-                  _context3.next = 5;
+                if (this.props.user.id) {
+                  _context3.next = 9;
                   break;
                 }
 
-                _context3.next = 5;
+                cart = JSON.parse(window.localStorage.getItem("cart"));
+
+                if (!cart[this.props.achar.id]) {
+                  cart[this.props.achar.id] = 1;
+                } else {
+                  cart[this.props.achar.id]++;
+                }
+
+                stringedCart = JSON.stringify(cart);
+                window.localStorage.setItem("cart", stringedCart);
+                _context3.next = 14;
+                break;
+
+              case 9:
+                if (this.props.cart.id) {
+                  _context3.next = 14;
+                  break;
+                }
+
+                _context3.next = 12;
                 return this.props.getCart(this.props.user.id);
 
-              case 5:
-                _context3.next = 7;
+              case 12:
+                _context3.next = 14;
                 return this.props.addToTheCart(this.props.achar.id, this.props.cart.id);
 
-              case 7:
+              case 14:
               case "end":
                 return _context3.stop();
             }
@@ -8993,6 +9062,32 @@ var mapDispatch = function mapDispatch(dispatch) {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapState, mapDispatch)(SingleAchar));
+
+/***/ }),
+
+/***/ "./src/client/components/theme.js":
+/*!****************************************!*
+  !*** ./src/client/components/theme.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/createMuiTheme.js");
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__.default)({
+  props: {
+    // Name of the component ⚛️
+    Card: {
+      // The properties to apply
+      disableRipple: true // No more ripple, on the whole application 💣!
+
+    }
+  }
+}));
 
 /***/ }),
 

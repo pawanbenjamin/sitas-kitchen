@@ -13,12 +13,6 @@ const AuthForm = (props) => {
 
   console.log(user);
 
-  useEffect(() => {
-    if (user.id) {
-      getCart(user.id);
-    }
-  }, [user]);
-
   return (
     <div>
       {user.id ? (

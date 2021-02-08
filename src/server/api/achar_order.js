@@ -10,23 +10,23 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.put("/", async (req, res, next) => {
-  try {
-    const achar_order = await Achar_Order.findOrCreate({
-      where: {
-        orderId: req.body.orderId,
-        acharId: req.body.acharId,
-      },
-    });
-    if (achar_order.qty >= 1) {
-      achar_order.qty++;
-    } else {
-      achar_order.qty = 1;
-    }
-    res.json(achar_order);
-  } catch (error) {
-    next(error);
-  }
-});
+// router.put("/", async (req, res, next) => {
+//   try {
+//     const achar_order = await Achar_Order.findOrCreate({
+//       where: {
+//         orderId: req.body.orderId,
+//         acharId: req.body.acharId,
+//       },
+//     });
+//     if (achar_order.qty >= 1) {
+//       achar_order.qty++;
+//     } else {
+//       achar_order.qty = 1;
+//     }
+//     res.json(achar_order);
+//   } catch (error) {
+//     next(error);
+//   }
+// });
 
 module.exports = router;
