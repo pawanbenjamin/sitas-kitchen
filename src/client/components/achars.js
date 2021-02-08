@@ -1,4 +1,5 @@
 import React from "react";
+import { compose } from "redux";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchAchars } from "../store/achars";
@@ -14,17 +15,10 @@ import {
   Button,
 } from "@material-ui/core";
 
-import { makeStyles} from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/styles";
 
-const useStyles = makeStyles({
-  root: {
-    maxWidth: 100,
-    disableRipple: true,
-  },
-  media: {
-    height: 100,
-  },
-});
+const styles = () => ({});
 
 class Achars extends React.Component {
   constructor() {
@@ -35,7 +29,6 @@ class Achars extends React.Component {
   componentDidMount() {
     this.props.getAchars();
     this.props.clearSingle();
-    const classes = useStyles();
   }
 
   async handleDelete(e) {
@@ -47,13 +40,16 @@ class Achars extends React.Component {
   render() {
     console.log(this.props.achars);
     return (
-      <>
-        <Typography>All the Achars</Typography>
+      <div className="achars">
+        <Typography className="desc">All the Achars</Typography>
         {this.props.achars
           ? this.props.achars.map((achar) => (
-              <Card className={classes.root}>
+              <Card key={achar.id} className="achar-card">
                 <CardActionArea>
-                  <CardMedia className={classes.media} image={achar.imageUrl} />
+                  <CardMedia
+                    style={{ height: "100px", padding: "20px" }}
+                    image={achar.imageUrl}
+                  />
                   <CardContent>
                     <Typography>{achar.name}</Typography>
                     <Typography>{`$${achar.price / 100}`}</Typography>
@@ -68,7 +64,7 @@ class Achars extends React.Component {
             ))
           : null}
         <div>{this.props.user.isAdmin ? <AddAchar /> : null}</div>
-      </>
+      </div>
     );
   }
 }
@@ -84,4 +80,4 @@ const mapDis = (dispatch) => ({
   clearSingle: () => dispatch(clearAchar()),
 });
 
-export default connect(mapState, mapDis)(Achars);
+export default compose(connect(mapState, mapDis), withStyles(styles))(Achars);

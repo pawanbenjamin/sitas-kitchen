@@ -30,7 +30,7 @@ const AuthForm = (props) => {
           <input name="lastName" type="text" placeholder="Last Name" />
           <input name="email" type="text" placeholder="email" />
           <input name="password" type="password" placeholder="password" />
-          <Button variant="contained" type="submit">
+          <Button variant="contained" type="submit" style={{ margin: "20px" }}>
             {displayName}
           </Button>
           {error && error.response && <div>{error.response.data}</div>}
