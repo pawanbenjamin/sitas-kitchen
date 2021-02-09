@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Order, Achar } = require("../db/models");
+const { Order, Achar, Achar_Order } = require("../db/models");
 
 router.get("/", async (req, res, next) => {
   try {
@@ -44,6 +44,19 @@ router.put("/:orderId/addProduct/:acharId", async (req, res, next) => {
         historicalPrice: achar.price,
       },
     });
+    // use save() on model to fire the aftersave or update()
+    // const acharOrder = await Achar_Order.findAll({
+    //   where: {
+    //     orderId: cart.id,
+    //   },
+    // });
+    // let newTotal = 0;
+    // acharOrder.forEach((achar) => {
+    //   newTotal += achar.historicalPrice * achar.qty;
+    // });
+    // cart.total = newTotal;
+    // cart.save();
+    await cart.setCartTotal(cart);
     res.json(cart);
   } catch (error) {
     next(error);
@@ -55,6 +68,7 @@ router.delete("/:orderId/removeProduct/:acharId", async (req, res, next) => {
     const cart = await Order.findByPk(req.params.orderId);
     const achar = await Achar.findByPk(req.params.acharId);
     await cart.removeAchar(achar);
+    await cart.setCartTotal(cart);
     res.json(cart);
   } catch (error) {
     next(error);

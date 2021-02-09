@@ -10,14 +10,6 @@ const Achar_Order = db.define("Achar_Order", {
   historicalPrice: Sequelize.INTEGER,
 });
 
-Achar_Order.beforeUpdate(async (a_o) => {
-  try {
-    let achar = await a_o.getAchar();
-    let price = achar.price;
-    a_o.historicalPrice = price;
-  } catch (error) {
-    console.error(error);
-  }
-});
+
 
 module.exports = Achar_Order;

@@ -27,9 +27,9 @@ const Cart = (props) => {
               <li>${achar.price}</li>
             </ul>
             <button
-              onClick={() => {
-                removeItem(cart.id, achar.id);
-                getCart(user.id);
+              onClick={async () => {
+                await removeItem(cart.id, achar.id);
+                await getCart(user.id);
               }}
             >
               Delete from Cart
