@@ -32,8 +32,6 @@ class AddAchar extends React.Component {
   }
 
   render() {
-    console.log(this.props.user);
-
     return (
       <div className="addAchar">
         <h3>Welcome Admin! Add and Achar:</h3>

@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Order } = require("../db/models");
+const { Order, Achar } = require("../db/models");
 
 router.get("/", async (req, res, next) => {
   try {
@@ -25,21 +25,35 @@ router.get("/:id", async (req, res, next) => {
 
 // post guest cart to orders
 // /:id, id is guest
-router.post('/:guest', async(req, res, next)=> {
+router.post("/:guest", async (req, res, next) => {
   try {
-    const guestOrder = Order.create(req.body)
+    const guestOrder = Order.create(req.body);
 
-    res.json(guestOrder)
+    res.json(guestOrder);
   } catch (error) {
-    next(error)
+    next(error);
   }
-})
+});
 
-router.put("/:id", async (req, res, next) => {
+router.put("/:orderId/addProduct/:acharId", async (req, res, next) => {
   try {
-    const cart = await Order.findByPk(req.params.id);
-    const updatedCart = await cart.update(req.body);
-    res.json(updatedCart);
+    console.log("REQ BODY", req.body);
+    const cart = await Order.findByPk(req.params.orderId);
+    const achar = await Achar.findByPk(req.params.acharId);
+    await cart.addAchar(achar);
+    res.json(cart);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.put("/:orderId/removeProduct/:acharId", async (req, res, next) => {
+  try {
+    console.log("REQ BODY", req.body);
+    const cart = await Order.findByPk(req.params.orderId);
+    const achar = await Achar.findByPk(req.params.acharId);
+    await cart.removeAchar(achar);
+    res.json(cart);
   } catch (error) {
     next(error);
   }

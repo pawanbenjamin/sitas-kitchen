@@ -18,6 +18,7 @@ router.put("/", async (req, res, next) => {
         acharId: req.body.acharId,
       },
     });
+    console.log(achar_order);
     if (achar_order.qty >= 1) {
       achar_order.qty++;
     } else {

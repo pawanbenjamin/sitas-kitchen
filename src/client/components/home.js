@@ -18,7 +18,6 @@ const Home = (props) => {
       window.localStorage.setItem("cart", stringCart);
     } else {
       getCart(user.id);
-      console.log("The New User is:", user);
     }
   }, [user]);
 

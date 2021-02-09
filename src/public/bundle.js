@@ -8306,7 +8306,6 @@ var Achars = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      console.log(this.props.achars);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "achars"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__.default, {
@@ -8473,7 +8472,6 @@ var AddAchar = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      console.log(this.props.user);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "addAchar"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Welcome Admin! Add and Achar:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
@@ -8669,13 +8667,17 @@ var Cart = function Cart(props) {
       getCart = props.getCart,
       cart = props.cart;
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    getCart(user.id);
+    if (!user.id) {} else {
+      getCart(user.id);
+    }
   }, [user]);
   var achars = cart.achars;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "cart"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "The Cart"), achars !== undefined ? achars.map(function (achar) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, achar.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "$", achar.price));
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+      key: achar.id
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, achar.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "$", achar.price));
   }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Your cart is Empty!"));
 };
 
@@ -8734,7 +8736,6 @@ var Home = function Home(props) {
       window.localStorage.setItem("cart", stringCart);
     } else {
       getCart(user.id);
-      console.log("The New User is:", user);
     }
   }, [user]);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -9005,10 +9006,9 @@ var SingleAchar = /*#__PURE__*/function (_React$Component) {
             switch (_context3.prev = _context3.next) {
               case 0:
                 e.preventDefault();
-                console.log(this.props);
 
                 if (this.props.user.id) {
-                  _context3.next = 9;
+                  _context3.next = 8;
                   break;
                 }
 
@@ -9022,23 +9022,23 @@ var SingleAchar = /*#__PURE__*/function (_React$Component) {
 
                 stringedCart = JSON.stringify(cart);
                 window.localStorage.setItem("cart", stringedCart);
-                _context3.next = 12;
+                _context3.next = 13;
                 break;
 
-              case 9:
+              case 8:
                 if (this.props.cart.id) {
-                  _context3.next = 12;
+                  _context3.next = 13;
                   break;
                 }
 
-                _context3.next = 12;
+                _context3.next = 11;
                 return this.props.getCart(this.props.user.id);
 
-              case 12:
-                _context3.next = 14;
+              case 11:
+                _context3.next = 13;
                 return this.props.addToTheCart(this.props.achar.id, this.props.cart.id);
 
-              case 14:
+              case 13:
               case "end":
                 return _context3.stop();
             }
@@ -9505,23 +9505,45 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 
-var GET_CART = "GET_CART"; // const ADD_ACHAR = "ADD_ACHAR"
+var GET_CART = "GET_CART";
+var ADD_ACHAR = "ADD_ACHAR";
 
 var gotCart = function gotCart(cart) {
   return {
     type: GET_CART,
     cart: cart
   };
-}; // const addAchar = (achar) => ({
-//   type: ADD_ACHAR,
-//   achar
-// })
+};
 
+var addAchar = function addAchar(achar) {
+  return {
+    type: ADD_ACHAR,
+    achar: achar
+  };
+};
 
 var fetchCart = function fetchCart(id) {
   return /*#__PURE__*/function () {
@@ -9564,39 +9586,33 @@ var fetchCart = function fetchCart(id) {
 var addToCart = function addToCart(acharId, orderId) {
   return /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(dispatch) {
-      var cart;
+      var achar;
       return regeneratorRuntime.wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
               _context2.prev = 0;
-              _context2.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_0___default().put("/api/achar_order", {
-                acharId: acharId,
-                orderId: orderId
-              });
+              console.log("In THunk");
+              _context2.next = 4;
+              return axios__WEBPACK_IMPORTED_MODULE_0___default().put("/api/orders/".concat(orderId, "/addProduct/").concat(acharId));
 
-            case 3:
-              _context2.next = 5;
-              return axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/orders/".concat(orderId));
-
-            case 5:
-              cart = _context2.sent;
-              dispatch(gotCart(cart));
-              _context2.next = 12;
+            case 4:
+              achar = _context2.sent;
+              dispatch(addAchar(achar.data));
+              _context2.next = 11;
               break;
 
-            case 9:
-              _context2.prev = 9;
+            case 8:
+              _context2.prev = 8;
               _context2.t0 = _context2["catch"](0);
               console.error(_context2.t0);
 
-            case 12:
+            case 11:
             case "end":
               return _context2.stop();
           }
         }
-      }, _callee2, null, [[0, 9]]);
+      }, _callee2, null, [[0, 8]]);
     }));
 
     return function (_x2) {
@@ -9611,6 +9627,11 @@ var addToCart = function addToCart(acharId, orderId) {
   switch (action.type) {
     case GET_CART:
       return action.cart;
+
+    case ADD_ACHAR:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        achars: [].concat(_toConsumableArray(state.achars), [action.achar])
+      });
 
     default:
       return state;

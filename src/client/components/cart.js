@@ -6,7 +6,10 @@ const Cart = (props) => {
   const { user, getCart, cart } = props;
 
   useEffect(() => {
-    getCart(user.id);
+    if (!user.id) {
+    } else {
+      getCart(user.id);
+    }
   }, [user]);
 
   let achars = cart.achars;
@@ -16,7 +19,7 @@ const Cart = (props) => {
       <h3>The Cart</h3>
       {achars !== undefined ? (
         achars.map((achar) => (
-          <ul>
+          <ul key={achar.id}>
             <li>{achar.name}</li>
             <li>${achar.price}</li>
           </ul>

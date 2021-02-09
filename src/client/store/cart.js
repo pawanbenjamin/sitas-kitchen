@@ -2,17 +2,17 @@ import axios from "axios";
 
 const GET_CART = "GET_CART";
 
-// const ADD_ACHAR = "ADD_ACHAR"
+const ADD_ACHAR = "ADD_ACHAR";
 
 const gotCart = (cart) => ({
   type: GET_CART,
   cart,
 });
 
-// const addAchar = (achar) => ({
-//   type: ADD_ACHAR,
-//   achar
-// })
+const addAchar = (achar) => ({
+  type: ADD_ACHAR,
+  achar,
+});
 
 export const fetchCart = (id) => async (dispatch) => {
   try {
@@ -25,9 +25,13 @@ export const fetchCart = (id) => async (dispatch) => {
 
 export const addToCart = (acharId, orderId) => async (dispatch) => {
   try {
-    await axios.put(`/api/achar_order`, { acharId, orderId });
-    const cart = await axios.get(`/api/orders/${orderId}`);
-    dispatch(gotCart(cart));
+    console.log("In THunk");
+
+    const achar = await axios.put(
+      `/api/orders/${orderId}/addProduct/${acharId}`
+    );
+
+    dispatch(addAchar(achar.data));
   } catch (error) {
     console.error(error);
   }
@@ -37,6 +41,11 @@ export default function (state = {}, action) {
   switch (action.type) {
     case GET_CART:
       return action.cart;
+    case ADD_ACHAR:
+      return {
+        ...state,
+        achars: [...state.achars, action.achar],
+      };
     default:
       return state;
   }
