@@ -4,15 +4,34 @@ const GET_CART = "GET_CART";
 
 const ADD_ACHAR = "ADD_ACHAR";
 
+const REMOVE_ACHAR = "REMOVE_ACHAR";
+
 const gotCart = (cart) => ({
   type: GET_CART,
   cart,
 });
 
-const addAchar = (achar) => ({
+const addAchar = (acharId) => ({
   type: ADD_ACHAR,
+  acharId,
+});
+
+const removeAchar = (achar) => ({
+  type: REMOVE_ACHAR,
   achar,
 });
+
+export const deleteCartItem = (orderId, acharId) => async (dispatch) => {
+  try {
+    const cart = await axios.delete(
+      `/api/orders/${orderId}/removeProduct/${acharId}`
+    );
+    const { data } = await axios.get(`/api/achars/${acharId}`);
+    dispatch(removeAchar(data));
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 export const fetchCart = (id) => async (dispatch) => {
   try {
@@ -45,6 +64,14 @@ export default function (state = {}, action) {
       return {
         ...state,
         achars: [...state.achars, action.achar],
+      };
+    case REMOVE_ACHAR:
+      const newAchars = state.achars.filter(
+        (achar) => achar.id !== action.acharId
+      );
+      return {
+        ...state,
+        achars: newAchars,
       };
     default:
       return state;

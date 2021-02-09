@@ -65,9 +65,10 @@ class SingleAchar extends React.Component {
     } else {
       if (!this.props.cart.id) {
         await this.props.getCart(this.props.user.id);
-        await this.props.addToTheCart(this.props.achar.id, this.props.cart.id);
       }
     }
+    await this.props.addToTheCart(this.props.achar.id, this.props.cart.id);
+    await this.props.getCart(this.props.user.id);
   }
 
   render() {

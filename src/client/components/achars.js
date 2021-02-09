@@ -40,7 +40,7 @@ class Achars extends React.Component {
     return (
       <div className="achars">
         <Typography className="desc">All the Achars</Typography>
-        {this.props.achars
+        {this.props.achars !== undefined
           ? this.props.achars.map((achar) => (
               <Card
                 key={achar.id}

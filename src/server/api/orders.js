@@ -47,7 +47,7 @@ router.put("/:orderId/addProduct/:acharId", async (req, res, next) => {
   }
 });
 
-router.put("/:orderId/removeProduct/:acharId", async (req, res, next) => {
+router.delete("/:orderId/removeProduct/:acharId", async (req, res, next) => {
   try {
     console.log("REQ BODY", req.body);
     const cart = await Order.findByPk(req.params.orderId);
