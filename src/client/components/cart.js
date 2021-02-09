@@ -1,30 +1,27 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { fetchCart, deleteCartItem } from "../store/cart";
+import { fetchAchars } from "../store/achars";
 
 const Cart = (props) => {
-  const { user, getCart, cart, removeItem } = props;
+  const { user, getCart, cart, removeItem, getAchars } = props;
 
   useEffect(() => {
     if (!user.id) {
       console.log("NO USER");
     } else {
       getCart(user.id);
+      getAchars();
     }
   }, [user]);
 
-  // const handleDelete = (e) => {
-  //   e.preventDefault();
-  //   removeItem(cart.id);
-  //   getCart(user.id);
-  // };
-
+  console.log(typeof cart.achars);
   return (
     <div className="cart">
       <h3>The Cart</h3>
-      {cart.achars !== undefined ? (
-        cart.achars.map((achar) => (
-          <div>
+      {typeof cart.achars === "object" ? (
+        cart.achars.map((achar, i) => (
+          <div key={i}>
             <ul key={achar.id}>
               <li>{achar.name}</li>
               <li>${achar.price}</li>
@@ -54,6 +51,7 @@ const mapState = (state) => ({
 const mapDispatch = (dispatch) => ({
   getCart: (id) => dispatch(fetchCart(id)),
   removeItem: (orderId, acharId) => dispatch(deleteCartItem(orderId, acharId)),
+  getAchars: () => dispatch(fetchAchars()),
 });
 
 export default connect(mapState, mapDispatch)(Cart);

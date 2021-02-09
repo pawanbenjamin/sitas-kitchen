@@ -37,10 +37,13 @@ router.post("/:guest", async (req, res, next) => {
 
 router.put("/:orderId/addProduct/:acharId", async (req, res, next) => {
   try {
-    console.log("REQ BODY", req.body);
     const cart = await Order.findByPk(req.params.orderId);
     const achar = await Achar.findByPk(req.params.acharId);
-    await cart.addAchar(achar);
+    await cart.addAchar(achar, {
+      through: {
+        historicalPrice: achar.price,
+      },
+    });
     res.json(cart);
   } catch (error) {
     next(error);
@@ -49,7 +52,6 @@ router.put("/:orderId/addProduct/:acharId", async (req, res, next) => {
 
 router.delete("/:orderId/removeProduct/:acharId", async (req, res, next) => {
   try {
-    console.log("REQ BODY", req.body);
     const cart = await Order.findByPk(req.params.orderId);
     const achar = await Achar.findByPk(req.params.acharId);
     await cart.removeAchar(achar);

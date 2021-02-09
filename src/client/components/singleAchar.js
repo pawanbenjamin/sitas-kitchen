@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchAchar } from "../store/singleAchar";
+import { fetchAchars } from "../store/achars";
 import { deleteTheAchar, updateTheAchar } from "../store/singleAchar";
 import { addToCart, fetchCart } from "../store/cart";
 
@@ -19,6 +20,7 @@ class SingleAchar extends React.Component {
 
   componentDidMount() {
     this.props.getAchar(this.props.match.params.id);
+    this.props.getAchars();
   }
   async handleSubmit(e) {
     e.preventDefault();
@@ -53,22 +55,25 @@ class SingleAchar extends React.Component {
 
   async handleAdd(e) {
     e.preventDefault();
-    if (!this.props.user.id) {
-      const cart = JSON.parse(window.localStorage.getItem("cart"));
-      if (!cart[this.props.achar.id]) {
-        cart[this.props.achar.id] = 1;
-      } else {
-        cart[this.props.achar.id]++;
-      }
-      const stringedCart = JSON.stringify(cart);
-      window.localStorage.setItem("cart", stringedCart);
-    } else {
-      if (!this.props.cart.id) {
-        await this.props.getCart(this.props.user.id);
-      }
+    // if (!this.props.user.id) {
+    //   const cart = JSON.parse(window.localStorage.getItem("cart"));
+    //   if (!cart[this.props.achar.id]) {
+    //     cart[this.props.achar.id] = 1;
+    //   } else {
+    //     cart[this.props.achar.id]++;
+    //   }
+    //   const stringedCart = JSON.stringify(cart);
+    //   window.localStorage.setItem("cart", stringedCart);
+    // } else {
+    //   if (!this.props.cart.id) {
+    if (this.props.user.id) {
+      await this.props.getCart(this.props.user.id);
+      await this.props.addToTheCart(this.props.achar.id, this.props.cart.id);
+      await this.props.getCart(this.props.user.id);
+      await this.props.getAchars();
     }
-    await this.props.addToTheCart(this.props.achar.id, this.props.cart.id);
-    await this.props.getCart(this.props.user.id);
+    // }
+    // }
   }
 
   render() {
@@ -103,6 +108,7 @@ const mapState = (state) => ({
 const mapDispatch = (dispatch) => ({
   getCart: (id) => dispatch(fetchCart(id)),
   getAchar: (id) => dispatch(fetchAchar(id)),
+  getAchars: () => dispatch(fetchAchars()),
   deleteAchar: (id) => dispatch(deleteTheAchar(id)),
   updateAchar: (achar) => dispatch(updateTheAchar(achar)),
   addToTheCart: (acharId, orderId) => dispatch(addToCart(acharId, orderId)),

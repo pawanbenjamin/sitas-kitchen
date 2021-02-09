@@ -37,10 +37,11 @@ class Achars extends React.Component {
   }
 
   render() {
+    console.log(this.props.achars.length);
     return (
       <div className="achars">
         <Typography className="desc">All the Achars</Typography>
-        {this.props.achars !== undefined
+        {this.props.achars.length > 1
           ? this.props.achars.map((achar) => (
               <Card
                 key={achar.id}

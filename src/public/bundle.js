@@ -8306,11 +8306,12 @@ var Achars = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      console.log(this.props.achars.length);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "achars"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_5__.default, {
         className: "desc"
-      }, "All the Achars"), this.props.achars !== undefined ? this.props.achars.map(function (achar) {
+      }, "All the Achars"), this.props.achars.length > 1 ? this.props.achars.map(function (achar) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__.default, {
           key: achar.id,
           className: "achar-card",
@@ -8658,6 +8659,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _store_cart__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/cart */ "./src/client/store/cart.js");
+/* harmony import */ var _store_achars__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../store/achars */ "./src/client/store/achars.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+
 
 
 
@@ -8666,23 +8671,23 @@ var Cart = function Cart(props) {
   var user = props.user,
       getCart = props.getCart,
       cart = props.cart,
-      removeItem = props.removeItem;
+      removeItem = props.removeItem,
+      getAchars = props.getAchars;
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (!user.id) {
       console.log("NO USER");
     } else {
       getCart(user.id);
+      getAchars();
     }
-  }, [user]); // const handleDelete = (e) => {
-  //   e.preventDefault();
-  //   removeItem(cart.id);
-  //   getCart(user.id);
-  // };
-
+  }, [user]);
+  console.log(_typeof(cart.achars));
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "cart"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "The Cart"), cart.achars !== undefined ? cart.achars.map(function (achar) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "The Cart"), _typeof(cart.achars) === "object" ? cart.achars.map(function (achar, i) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      key: i
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
       key: achar.id
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, achar.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "$", achar.price)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
       onClick: function onClick() {
@@ -8707,6 +8712,9 @@ var mapDispatch = function mapDispatch(dispatch) {
     },
     removeItem: function removeItem(orderId, acharId) {
       return dispatch((0,_store_cart__WEBPACK_IMPORTED_MODULE_2__.deleteCartItem)(orderId, acharId));
+    },
+    getAchars: function getAchars() {
+      return dispatch((0,_store_achars__WEBPACK_IMPORTED_MODULE_3__.fetchAchars)());
     }
   };
 };
@@ -8876,8 +8884,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _store_singleAchar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/singleAchar */ "./src/client/store/singleAchar.js");
-/* harmony import */ var _store_cart__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../store/cart */ "./src/client/store/cart.js");
-/* harmony import */ var _updateAchar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./updateAchar */ "./src/client/components/updateAchar.js");
+/* harmony import */ var _store_achars__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../store/achars */ "./src/client/store/achars.js");
+/* harmony import */ var _store_cart__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../store/cart */ "./src/client/store/cart.js");
+/* harmony import */ var _updateAchar__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./updateAchar */ "./src/client/components/updateAchar.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -8911,6 +8920,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var SingleAchar = /*#__PURE__*/function (_React$Component) {
   _inherits(SingleAchar, _React$Component);
 
@@ -8935,6 +8945,7 @@ var SingleAchar = /*#__PURE__*/function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.getAchar(this.props.match.params.id);
+      this.props.getAchars();
     }
   }, {
     key: "handleSubmit",
@@ -9024,49 +9035,43 @@ var SingleAchar = /*#__PURE__*/function (_React$Component) {
     key: "handleAdd",
     value: function () {
       var _handleAdd = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(e) {
-        var cart, stringedCart;
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                e.preventDefault();
+                e.preventDefault(); // if (!this.props.user.id) {
+                //   const cart = JSON.parse(window.localStorage.getItem("cart"));
+                //   if (!cart[this.props.achar.id]) {
+                //     cart[this.props.achar.id] = 1;
+                //   } else {
+                //     cart[this.props.achar.id]++;
+                //   }
+                //   const stringedCart = JSON.stringify(cart);
+                //   window.localStorage.setItem("cart", stringedCart);
+                // } else {
+                //   if (!this.props.cart.id) {
 
-                if (this.props.user.id) {
-                  _context3.next = 8;
+                if (!this.props.user.id) {
+                  _context3.next = 10;
                   break;
                 }
 
-                cart = JSON.parse(window.localStorage.getItem("cart"));
-
-                if (!cart[this.props.achar.id]) {
-                  cart[this.props.achar.id] = 1;
-                } else {
-                  cart[this.props.achar.id]++;
-                }
-
-                stringedCart = JSON.stringify(cart);
-                window.localStorage.setItem("cart", stringedCart);
-                _context3.next = 11;
-                break;
-
-              case 8:
-                if (this.props.cart.id) {
-                  _context3.next = 11;
-                  break;
-                }
-
-                _context3.next = 11;
+                _context3.next = 4;
                 return this.props.getCart(this.props.user.id);
 
-              case 11:
-                _context3.next = 13;
+              case 4:
+                _context3.next = 6;
                 return this.props.addToTheCart(this.props.achar.id, this.props.cart.id);
 
-              case 13:
-                _context3.next = 15;
+              case 6:
+                _context3.next = 8;
                 return this.props.getCart(this.props.user.id);
 
-              case 15:
+              case 8:
+                _context3.next = 10;
+                return this.props.getAchars();
+
+              case 10:
               case "end":
                 return _context3.stop();
             }
@@ -9096,7 +9101,7 @@ var SingleAchar = /*#__PURE__*/function (_React$Component) {
         onClick: this.handleAdd
       }, "Add to Cart"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, achar.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Price: $", achar.price / 100), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         onClick: this.handleDelete
-      }, "Delete from DB"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_updateAchar__WEBPACK_IMPORTED_MODULE_4__.default, {
+      }, "Delete from DB"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_updateAchar__WEBPACK_IMPORTED_MODULE_5__.default, {
         handleSubmit: this.handleSubmit
       })));
     }
@@ -9116,10 +9121,13 @@ var mapState = function mapState(state) {
 var mapDispatch = function mapDispatch(dispatch) {
   return {
     getCart: function getCart(id) {
-      return dispatch((0,_store_cart__WEBPACK_IMPORTED_MODULE_3__.fetchCart)(id));
+      return dispatch((0,_store_cart__WEBPACK_IMPORTED_MODULE_4__.fetchCart)(id));
     },
     getAchar: function getAchar(id) {
       return dispatch((0,_store_singleAchar__WEBPACK_IMPORTED_MODULE_2__.fetchAchar)(id));
+    },
+    getAchars: function getAchars() {
+      return dispatch((0,_store_achars__WEBPACK_IMPORTED_MODULE_3__.fetchAchars)());
     },
     deleteAchar: function deleteAchar(id) {
       return dispatch((0,_store_singleAchar__WEBPACK_IMPORTED_MODULE_2__.deleteTheAchar)(id));
@@ -9128,7 +9136,7 @@ var mapDispatch = function mapDispatch(dispatch) {
       return dispatch((0,_store_singleAchar__WEBPACK_IMPORTED_MODULE_2__.updateTheAchar)(achar));
     },
     addToTheCart: function addToTheCart(acharId, orderId) {
-      return dispatch((0,_store_cart__WEBPACK_IMPORTED_MODULE_3__.addToCart)(acharId, orderId));
+      return dispatch((0,_store_cart__WEBPACK_IMPORTED_MODULE_4__.addToCart)(acharId, orderId));
     }
   };
 };
