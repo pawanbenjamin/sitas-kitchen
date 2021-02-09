@@ -24,9 +24,19 @@ const Home = (props) => {
 
   return (
     <div className="home">
-      <Typography>Welcome to Sita's Kitchen!</Typography>
-      <Typography>Browse our Home-Made Achars, and more!</Typography>
-      <Link to="/achars">Achars</Link>
+      {user.id ? (
+        <>
+          <Typography>Welcome {user.firstName} to Sita's Kitchen!</Typography>
+          <Typography>Browse our Home-Made Achars, and more!</Typography>
+          <Link to="/achars">Achars</Link>
+        </>
+      ) : (
+        <>
+          <Typography>Welcome to Sita's Kitchen!</Typography>
+          <Typography>Browse our Home-Made Achars, and more!</Typography>
+          <Link to="/achars">Achars</Link>
+        </>
+      )}
     </div>
   );
 };

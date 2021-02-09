@@ -8650,9 +8650,51 @@ AuthForm.propTypes = {
 /*!***************************************!*
   !*** ./src/client/components/cart.js ***!
   \***************************************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /Users/pawanbenjamin/Projects/sitas-kitchen/src/client/components/cart.js: Unexpected token (61:8)\n\n\u001b[0m \u001b[90m 59 | \u001b[39m        \u001b[0m\n\u001b[0m \u001b[90m 60 | \u001b[39m        \u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 61 | \u001b[39m        \u001b[33m:\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m    | \u001b[39m        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 62 | \u001b[39m        (\u001b[0m\n\u001b[0m \u001b[90m 63 | \u001b[39m          \u001b[33m<\u001b[39m\u001b[33mTypography\u001b[39m style\u001b[33m=\u001b[39m{{ textAlign\u001b[33m:\u001b[39m \u001b[32m\"center\"\u001b[39m }}\u001b[33m>\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 64 | \u001b[39m            \u001b[33mYour\u001b[39m cart is \u001b[33mEmpty\u001b[39m\u001b[33m!\u001b[39m\u001b[0m\n    at Object._raise (/Users/pawanbenjamin/Projects/sitas-kitchen/node_modules/@babel/parser/lib/index.js:748:17)\n    at Object.raiseWithData (/Users/pawanbenjamin/Projects/sitas-kitchen/node_modules/@babel/parser/lib/index.js:741:17)\n    at Object.raise (/Users/pawanbenjamin/Projects/sitas-kitchen/node_modules/@babel/parser/lib/index.js:735:17)\n    at Object.unexpected (/Users/pawanbenjamin/Projects/sitas-kitchen/node_modules/@babel/parser/lib/index.js:9097:16)\n    at Object.parseExprAtom (/Users/pawanbenjamin/Projects/sitas-kitchen/node_modules/@babel/parser/lib/index.js:10548:20)\n    at Object.parseExprAtom (/Users/pawanbenjamin/Projects/sitas-kitchen/node_modules/@babel/parser/lib/index.js:4759:20)\n    at Object.parseExprSubscripts (/Users/pawanbenjamin/Projects/sitas-kitchen/node_modules/@babel/parser/lib/index.js:10122:23)\n    at Object.parseUpdate (/Users/pawanbenjamin/Projects/sitas-kitchen/node_modules/@babel/parser/lib/index.js:10102:21)\n    at Object.parseMaybeUnary (/Users/pawanbenjamin/Projects/sitas-kitchen/node_modules/@babel/parser/lib/index.js:10091:17)\n    at Object.parseExprOps (/Users/pawanbenjamin/Projects/sitas-kitchen/node_modules/@babel/parser/lib/index.js:9961:23)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _store_cart__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/cart */ "./src/client/store/cart.js");
+
+
+
+
+var Cart = function Cart(props) {
+  var user = props.user,
+      getCart = props.getCart,
+      cart = props.cart;
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    getCart(user.id);
+  }, [user]);
+  var achars = cart.achars;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "cart"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "The Cart"), achars !== undefined ? achars.map(function (achar) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, achar.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "$", achar.price));
+  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Your cart is Empty!"));
+};
+
+var mapState = function mapState(state) {
+  return {
+    user: state.user,
+    cart: state.cart
+  };
+};
+
+var mapDispatch = function mapDispatch(dispatch) {
+  return {
+    getCart: function getCart(id) {
+      return dispatch((0,_store_cart__WEBPACK_IMPORTED_MODULE_2__.fetchCart)(id));
+    }
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapState, mapDispatch)(Cart));
 
 /***/ }),
 
@@ -8697,9 +8739,11 @@ var Home = function Home(props) {
   }, [user]);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "home"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__.default, null, "Welcome to Sita's Kitchen!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__.default, null, "Browse our Home-Made Achars, and more!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
+  }, user.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__.default, null, "Welcome ", user.firstName, " to Sita's Kitchen!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__.default, null, "Browse our Home-Made Achars, and more!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
     to: "/achars"
-  }, "Achars"));
+  }, "Achars")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__.default, null, "Welcome to Sita's Kitchen!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__.default, null, "Browse our Home-Made Achars, and more!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
+    to: "/achars"
+  }, "Achars")));
 };
 
 var mapS = function mapS(state) {
@@ -8978,12 +9022,12 @@ var SingleAchar = /*#__PURE__*/function (_React$Component) {
 
                 stringedCart = JSON.stringify(cart);
                 window.localStorage.setItem("cart", stringedCart);
-                _context3.next = 14;
+                _context3.next = 12;
                 break;
 
               case 9:
                 if (this.props.cart.id) {
-                  _context3.next = 14;
+                  _context3.next = 12;
                   break;
                 }
 

@@ -23,6 +23,18 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
+// post guest cart to orders
+// /:id, id is guest
+router.post('/:guest', async(req, res, next)=> {
+  try {
+    const guestOrder = Order.create(req.body)
+
+    res.json(guestOrder)
+  } catch (error) {
+    next(error)
+  }
+})
+
 router.put("/:id", async (req, res, next) => {
   try {
     const cart = await Order.findByPk(req.params.id);
