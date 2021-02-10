@@ -6,6 +6,10 @@ const ADD_ACHAR = "ADD_ACHAR";
 
 const REMOVE_ACHAR = "REMOVE_ACHAR";
 
+const INCREMENT = "INCREMENT";
+
+const DECRIMENT = "DECRIMENT";
+
 const gotCart = (cart) => ({
   type: GET_CART,
   cart,
@@ -20,6 +24,36 @@ const removeAchar = (achar) => ({
   type: REMOVE_ACHAR,
   achar,
 });
+
+const incrementAchar = (cart) => ({
+  type: INCREASE_QUANT,
+  cart,
+});
+
+const decrementAchar = (cart) => ({
+  type: DECREASE_QUANT,
+  cart,
+});
+
+export const incrementCount = (acharId, orderId) => async (dispatch) => {
+  try {
+    await axios.put("/api/achar_order/add", { acharId, orderId });
+    const { data } = await axios.get(`/api/orders/${orderId}`);
+    dispatch(incrementAchar(data));
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const decrementCount = (acharId, orderId) => async (dispatch) => {
+  try {
+    await axios.put("/api/achar_order/subtract", { acharId, orderId });
+    const { data } = await axios.get(`/api/orders/${orderId}`);
+    dispatch(decrementCount(data));
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 export const deleteCartItem = (orderId, acharId) => async (dispatch) => {
   try {
@@ -58,6 +92,10 @@ export const addToCart = (acharId, orderId) => async (dispatch) => {
 
 export default function (state = {}, action) {
   switch (action.type) {
+    case DECRIMENT:
+        return action.cart
+    case INCREMENT:
+      return action.cart;
     case GET_CART:
       return action.cart;
     case ADD_ACHAR:

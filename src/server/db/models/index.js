@@ -9,6 +9,7 @@ const Achar_Order = require("./achar_order");
 Order.belongsToMany(Achar, { through: Achar_Order });
 Achar.belongsToMany(Order, { through: Achar_Order });
 
+
 User.hasMany(Order);
 Order.belongsTo(User);
 

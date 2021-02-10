@@ -8664,8 +8664,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 
 
 
@@ -8676,7 +8674,9 @@ var Cart = function Cart(props) {
       getCart = props.getCart,
       cart = props.cart,
       removeItem = props.removeItem,
-      getAchars = props.getAchars;
+      getAchars = props.getAchars,
+      addQty = props.addQty,
+      subQty = props.subQty;
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (!user.id) {
       console.log("NO USER");
@@ -8685,35 +8685,96 @@ var Cart = function Cart(props) {
       getAchars();
     }
   }, [user]);
-  console.log(_typeof(cart.achars));
+  console.log(cart.achars);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "cart"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "The Cart"), _typeof(cart.achars) === "object" ? cart.achars.map(function (achar, i) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "The Cart"), cart.total > 0 ? cart.achars.map(function (achar, i) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
       key: i
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
       key: achar.id
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, achar.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "$", achar.price)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-      onClick: /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return removeItem(cart.id, achar.id);
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, achar.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "$", achar.price), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Quantity: ", achar.Achar_Order.qty)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      onClick: /*#__PURE__*/function () {
+        var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(e) {
+          return regeneratorRuntime.wrap(function _callee$(_context) {
+            while (1) {
+              switch (_context.prev = _context.next) {
+                case 0:
+                  e.preventDefault();
+                  _context.next = 3;
+                  return removeItem(cart.id, achar.id);
 
-              case 2:
-                _context.next = 4;
-                return getCart(user.id);
+                case 3:
+                  _context.next = 5;
+                  return getCart(user.id);
 
-              case 4:
-              case "end":
-                return _context.stop();
+                case 5:
+                case "end":
+                  return _context.stop();
+              }
             }
-          }
-        }, _callee);
-      }))
-    }, "Delete from Cart"));
+          }, _callee);
+        }));
+
+        return function (_x) {
+          return _ref.apply(this, arguments);
+        };
+      }()
+    }, "Delete from Cart"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      onClick: /*#__PURE__*/function () {
+        var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(e) {
+          return regeneratorRuntime.wrap(function _callee2$(_context2) {
+            while (1) {
+              switch (_context2.prev = _context2.next) {
+                case 0:
+                  e.preventDefault();
+                  _context2.next = 3;
+                  return subQty(achar.id, cart.id);
+
+                case 3:
+                  _context2.next = 5;
+                  return getCart(user.id);
+
+                case 5:
+                case "end":
+                  return _context2.stop();
+              }
+            }
+          }, _callee2);
+        }));
+
+        return function (_x2) {
+          return _ref2.apply(this, arguments);
+        };
+      }()
+    }, "-"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      onClick: /*#__PURE__*/function () {
+        var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(e) {
+          return regeneratorRuntime.wrap(function _callee3$(_context3) {
+            while (1) {
+              switch (_context3.prev = _context3.next) {
+                case 0:
+                  e.preventDefault();
+                  _context3.next = 3;
+                  return addQty(achar.id, cart.id);
+
+                case 3:
+                  _context3.next = 5;
+                  return getCart(user.id);
+
+                case 5:
+                case "end":
+                  return _context3.stop();
+              }
+            }
+          }, _callee3);
+        }));
+
+        return function (_x3) {
+          return _ref3.apply(this, arguments);
+        };
+      }()
+    }, "+")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Your order total is ", cart.total));
   }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Your cart is Empty!"));
 };
 
@@ -8734,6 +8795,12 @@ var mapDispatch = function mapDispatch(dispatch) {
     },
     getAchars: function getAchars() {
       return dispatch((0,_store_achars__WEBPACK_IMPORTED_MODULE_3__.fetchAchars)());
+    },
+    addQty: function addQty(acharId, orderId) {
+      return dispatch((0,_store_cart__WEBPACK_IMPORTED_MODULE_2__.incrementCount)(acharId, orderId));
+    },
+    subQty: function subQty(acharId, orderId) {
+      return dispatch((0,_store_cart__WEBPACK_IMPORTED_MODULE_2__.decrementCount)(acharId, orderId));
     }
   };
 };
@@ -9554,6 +9621,8 @@ var addAnAchar = function addAnAchar(achar) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "incrementCount": () => /* binding */ incrementCount,
+/* harmony export */   "decrementCount": () => /* binding */ decrementCount,
 /* harmony export */   "deleteCartItem": () => /* binding */ deleteCartItem,
 /* harmony export */   "fetchCart": () => /* binding */ fetchCart,
 /* harmony export */   "addToCart": () => /* binding */ addToCart,
@@ -9587,6 +9656,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 var GET_CART = "GET_CART";
 var ADD_ACHAR = "ADD_ACHAR";
 var REMOVE_ACHAR = "REMOVE_ACHAR";
+var INCREMENT = "INCREMENT";
+var DECRIMENT = "DECRIMENT";
 
 var gotCart = function gotCart(cart) {
   return {
@@ -9609,10 +9680,24 @@ var removeAchar = function removeAchar(achar) {
   };
 };
 
-var deleteCartItem = function deleteCartItem(orderId, acharId) {
+var incrementAchar = function incrementAchar(cart) {
+  return {
+    type: INCREASE_QUANT,
+    cart: cart
+  };
+};
+
+var decrementAchar = function decrementAchar(cart) {
+  return {
+    type: DECREASE_QUANT,
+    cart: cart
+  };
+};
+
+var incrementCount = function incrementCount(acharId, orderId) {
   return /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch) {
-      var cart, _yield$axios$get, data;
+      var _yield$axios$get, data;
 
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
@@ -9620,31 +9705,33 @@ var deleteCartItem = function deleteCartItem(orderId, acharId) {
             case 0:
               _context.prev = 0;
               _context.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_0___default().delete("/api/orders/".concat(orderId, "/removeProduct/").concat(acharId));
+              return axios__WEBPACK_IMPORTED_MODULE_0___default().put("/api/achar_order/add", {
+                acharId: acharId,
+                orderId: orderId
+              });
 
             case 3:
-              cart = _context.sent;
-              _context.next = 6;
-              return axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/achars/".concat(acharId));
+              _context.next = 5;
+              return axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/orders/".concat(orderId));
 
-            case 6:
+            case 5:
               _yield$axios$get = _context.sent;
               data = _yield$axios$get.data;
-              dispatch(removeAchar(data));
-              _context.next = 14;
+              dispatch(incrementAchar(data));
+              _context.next = 13;
               break;
 
-            case 11:
-              _context.prev = 11;
+            case 10:
+              _context.prev = 10;
               _context.t0 = _context["catch"](0);
               console.error(_context.t0);
 
-            case 14:
+            case 13:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[0, 11]]);
+      }, _callee, null, [[0, 10]]);
     }));
 
     return function (_x) {
@@ -9652,7 +9739,7 @@ var deleteCartItem = function deleteCartItem(orderId, acharId) {
     };
   }();
 };
-var fetchCart = function fetchCart(id) {
+var decrementCount = function decrementCount(acharId, orderId) {
   return /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(dispatch) {
       var _yield$axios$get2, data;
@@ -9663,26 +9750,33 @@ var fetchCart = function fetchCart(id) {
             case 0:
               _context2.prev = 0;
               _context2.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/users/".concat(id, "/cart"));
+              return axios__WEBPACK_IMPORTED_MODULE_0___default().put("/api/achar_order/subtract", {
+                acharId: acharId,
+                orderId: orderId
+              });
 
             case 3:
+              _context2.next = 5;
+              return axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/orders/".concat(orderId));
+
+            case 5:
               _yield$axios$get2 = _context2.sent;
               data = _yield$axios$get2.data;
-              dispatch(gotCart(data));
-              _context2.next = 11;
+              dispatch(decrementCount(data));
+              _context2.next = 13;
               break;
 
-            case 8:
-              _context2.prev = 8;
+            case 10:
+              _context2.prev = 10;
               _context2.t0 = _context2["catch"](0);
               console.error(_context2.t0);
 
-            case 11:
+            case 13:
             case "end":
               return _context2.stop();
           }
         }
-      }, _callee2, null, [[0, 8]]);
+      }, _callee2, null, [[0, 10]]);
     }));
 
     return function (_x2) {
@@ -9690,40 +9784,121 @@ var fetchCart = function fetchCart(id) {
     };
   }();
 };
-var addToCart = function addToCart(acharId, orderId) {
+var deleteCartItem = function deleteCartItem(orderId, acharId) {
   return /*#__PURE__*/function () {
     var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(dispatch) {
-      var achar;
+      var cart, _yield$axios$get3, data;
+
       return regeneratorRuntime.wrap(function _callee3$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
               _context3.prev = 0;
-              console.log("In THunk");
-              _context3.next = 4;
-              return axios__WEBPACK_IMPORTED_MODULE_0___default().put("/api/orders/".concat(orderId, "/addProduct/").concat(acharId));
+              _context3.next = 3;
+              return axios__WEBPACK_IMPORTED_MODULE_0___default().delete("/api/orders/".concat(orderId, "/removeProduct/").concat(acharId));
 
-            case 4:
-              achar = _context3.sent;
-              dispatch(addAchar(achar.data));
-              _context3.next = 11;
+            case 3:
+              cart = _context3.sent;
+              _context3.next = 6;
+              return axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/achars/".concat(acharId));
+
+            case 6:
+              _yield$axios$get3 = _context3.sent;
+              data = _yield$axios$get3.data;
+              dispatch(removeAchar(data));
+              _context3.next = 14;
               break;
 
-            case 8:
-              _context3.prev = 8;
+            case 11:
+              _context3.prev = 11;
               _context3.t0 = _context3["catch"](0);
               console.error(_context3.t0);
 
-            case 11:
+            case 14:
             case "end":
               return _context3.stop();
           }
         }
-      }, _callee3, null, [[0, 8]]);
+      }, _callee3, null, [[0, 11]]);
     }));
 
     return function (_x3) {
       return _ref3.apply(this, arguments);
+    };
+  }();
+};
+var fetchCart = function fetchCart(id) {
+  return /*#__PURE__*/function () {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(dispatch) {
+      var _yield$axios$get4, data;
+
+      return regeneratorRuntime.wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              _context4.prev = 0;
+              _context4.next = 3;
+              return axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/users/".concat(id, "/cart"));
+
+            case 3:
+              _yield$axios$get4 = _context4.sent;
+              data = _yield$axios$get4.data;
+              dispatch(gotCart(data));
+              _context4.next = 11;
+              break;
+
+            case 8:
+              _context4.prev = 8;
+              _context4.t0 = _context4["catch"](0);
+              console.error(_context4.t0);
+
+            case 11:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4, null, [[0, 8]]);
+    }));
+
+    return function (_x4) {
+      return _ref4.apply(this, arguments);
+    };
+  }();
+};
+var addToCart = function addToCart(acharId, orderId) {
+  return /*#__PURE__*/function () {
+    var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(dispatch) {
+      var achar;
+      return regeneratorRuntime.wrap(function _callee5$(_context5) {
+        while (1) {
+          switch (_context5.prev = _context5.next) {
+            case 0:
+              _context5.prev = 0;
+              console.log("In THunk");
+              _context5.next = 4;
+              return axios__WEBPACK_IMPORTED_MODULE_0___default().put("/api/orders/".concat(orderId, "/addProduct/").concat(acharId));
+
+            case 4:
+              achar = _context5.sent;
+              dispatch(addAchar(achar.data));
+              _context5.next = 11;
+              break;
+
+            case 8:
+              _context5.prev = 8;
+              _context5.t0 = _context5["catch"](0);
+              console.error(_context5.t0);
+
+            case 11:
+            case "end":
+              return _context5.stop();
+          }
+        }
+      }, _callee5, null, [[0, 8]]);
+    }));
+
+    return function (_x5) {
+      return _ref5.apply(this, arguments);
     };
   }();
 };
@@ -9732,6 +9907,12 @@ var addToCart = function addToCart(acharId, orderId) {
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
+    case DECRIMENT:
+      return action.cart;
+
+    case INCREMENT:
+      return action.cart;
+
     case GET_CART:
       return action.cart;
 
