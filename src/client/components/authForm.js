@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import { auth } from "../store/user";
 import { fetchCart } from "../store/cart";
 import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
 
 // follow auth-form component
 
@@ -19,11 +20,11 @@ const AuthForm = (props) => {
         <Redirect to="/"></Redirect>
       ) : (
         <form onSubmit={handleSubmit} name={name}>
-          <input name="username" type="text" placeholder="User-Name" />
-          <input name="firstName" type="text" placeholder="First Name" />
-          <input name="lastName" type="text" placeholder="Last Name" />
-          <input name="email" type="text" placeholder="email" />
-          <input name="password" type="password" placeholder="password" />
+          <TextField name="username" type="text" placeholder="User-Name" />
+          <TextField name="firstName" type="text" placeholder="First Name" />
+          <TextField name="lastName" type="text" placeholder="Last Name" />
+          <TextField name="email" type="text" placeholder="email" />
+          <TextField name="password" type="password" placeholder="password" />
           <Button variant="contained" type="submit" style={{ margin: "20px" }}>
             {displayName}
           </Button>

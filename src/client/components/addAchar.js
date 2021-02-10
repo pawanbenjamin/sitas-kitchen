@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { addAnAchar, fetchAchars } from "../store/achars";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 
 class AddAchar extends React.Component {
   constructor() {
@@ -36,19 +38,18 @@ class AddAchar extends React.Component {
       <div className="addAchar">
         <h3>Welcome Admin! Add and Achar:</h3>
         <form onSubmit={this.handleSubmit} id="addAchar">
-          <label>Name:</label>
-          <input name="name"></input>
-          <label>Price</label>
-          <input name="price"></input>
-          <label>Description</label>
-          <input name="description"></input>
-          <label>Spice Level</label>
-          <input name="spiceLevel"></input>
-          <label>Stock Quantity:</label>
-          <input name="stockQty"></input>
-          <label>Image Url:</label>
-          <input name="imageUrl"></input>
-          <button type="submit">Submit</button>
+          <TextField name="name" placeholder="Name" />
+
+          <TextField name="price" placeholder="Price" />
+
+          <TextField name="description" placeholder="Description" />
+
+          <TextField name="spiceLevel" placeholder="Spice Level" />
+
+          <TextField name="stockQty" placeholder="Stock Qty" />
+
+          <TextField name="imageUrl" placeholder="Image Url" />
+          <Button type="submit">Submit</Button>
         </form>
       </div>
     );

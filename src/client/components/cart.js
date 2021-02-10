@@ -8,6 +8,15 @@ import {
 } from "../store/cart";
 import { fetchAchars } from "../store/achars";
 
+import Paper from "@material-ui/core/Paper";
+import { CardActionArea, Typography } from "@material-ui/core";
+import Card from "@material-ui/core/Card";
+import Grid from "@material-ui/core/Grid";
+import CardMedia from "@material-ui/core/CardMedia";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import Button from "@material-ui/core/Button";
+
 const Cart = (props) => {
   const { user, getCart, cart, removeItem, getAchars, addQty, subQty } = props;
 
@@ -21,18 +30,41 @@ const Cart = (props) => {
   }, [user]);
 
   return (
-    <div className="cart">
-      <h3>The Cart</h3>
+    <div>
+      <Typography
+        style={{
+          margin: "20px",
+          textAlign: "center",
+        }}
+      >
+        The Cart
+      </Typography>
       {cart.total > 0 ? (
         cart.achars.map((achar, i) => (
-          <>
-            <div key={i}>
-              <ul key={achar.id}>
-                <li>{achar.name}</li>
-                <li>${achar.price / 100}</li>
-                <li>Quantity: {achar.Achar_Order.qty}</li>
-              </ul>
-              <button
+          <Card
+            style={{
+              flexDirection: "column",
+              justifyContent: "center",
+              textAlign: "center",
+              marginRight: "10rem",
+              marginLeft: "10rem",
+              marginBottom: "5px",
+            }}
+          >
+            <CardActionArea>
+              <CardContent key={i}>
+                <Typography>{achar.name}</Typography>
+                <Typography>${achar.price / 100}</Typography>
+                <Typography>Quantity: {achar.Achar_Order.qty}</Typography>
+              </CardContent>
+            </CardActionArea>
+            <CardActions
+              style={{
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              <Button
                 onClick={async (e) => {
                   e.preventDefault();
                   await removeItem(cart.id, achar.id);
@@ -40,8 +72,8 @@ const Cart = (props) => {
                 }}
               >
                 Delete from Cart
-              </button>
-              <button
+              </Button>
+              <Button
                 disabled={achar.Achar_Order.qty < 2}
                 onClick={async (e) => {
                   e.preventDefault();
@@ -50,8 +82,8 @@ const Cart = (props) => {
                 }}
               >
                 -
-              </button>
-              <button
+              </Button>
+              <Button
                 onClick={async (e) => {
                   e.preventDefault();
                   await addQty(achar.id, cart.id);
@@ -59,14 +91,21 @@ const Cart = (props) => {
                 }}
               >
                 +
-              </button>
-            </div>
-          </>
+              </Button>
+            </CardActions>
+          </Card>
         ))
       ) : (
-        <h4>Your cart is Empty!</h4>
+        <Typography>Your cart is Empty!</Typography>
       )}
-      <h3>Your order total is ${cart.total / 100}</h3>
+      <Typography
+        style={{
+          marginTop: "20px",
+          textAlign: "center",
+        }}
+      >
+        Your order total is ${cart.total / 100}
+      </Typography>
     </div>
   );
 };

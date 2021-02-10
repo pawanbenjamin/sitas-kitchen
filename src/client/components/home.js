@@ -1,9 +1,11 @@
 import { Typography } from "@material-ui/core";
+
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchCart } from "../store/cart";
 import { fetchAchars } from "../store/achars";
+
 const Home = (props) => {
   const { user, getCart, getAchars } = props;
   // Get or Create DB cart if there is a user
@@ -29,7 +31,9 @@ const Home = (props) => {
         <>
           <Typography>Welcome {user.firstName} to Sita's Kitchen!</Typography>
           <Typography>Browse our Home-Made Achars, and more!</Typography>
-          <Link to="/achars">Achars</Link>
+          <Typography component={Link} to="/achars">
+            Achars
+          </Typography>
         </>
       ) : (
         <>
