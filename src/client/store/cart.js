@@ -26,12 +26,12 @@ const removeAchar = (achar) => ({
 });
 
 const incrementAchar = (cart) => ({
-  type: INCREASE_QUANT,
+  type: INCREMENT,
   cart,
 });
 
 const decrementAchar = (cart) => ({
-  type: DECREASE_QUANT,
+  type: DECRIMENT,
   cart,
 });
 
@@ -49,7 +49,7 @@ export const decrementCount = (acharId, orderId) => async (dispatch) => {
   try {
     await axios.put("/api/achar_order/subtract", { acharId, orderId });
     const { data } = await axios.get(`/api/orders/${orderId}`);
-    dispatch(decrementCount(data));
+    dispatch(decrementAchar(data));
   } catch (error) {
     console.error(error);
   }
@@ -92,10 +92,10 @@ export const addToCart = (acharId, orderId) => async (dispatch) => {
 
 export default function (state = {}, action) {
   switch (action.type) {
-    case DECRIMENT:
-        return action.cart
-    case INCREMENT:
-      return action.cart;
+    // case DECRIMENT:
+    //     return action.cart
+    // case INCREMENT:
+    //   return action.cart;
     case GET_CART:
       return action.cart;
     case ADD_ACHAR:

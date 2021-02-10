@@ -42,8 +42,10 @@ router.put("/subtract", async (req, res, next) => {
         acharId: req.body.acharId,
       },
     });
+    if (achar_order.qty > 0) {
+      achar_order.qty--;
+    }
 
-    achar_order.qty--;
     await achar_order.save();
     // stock qty should decrement
     // Get cart

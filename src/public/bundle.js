@@ -8685,7 +8685,6 @@ var Cart = function Cart(props) {
       getAchars();
     }
   }, [user]);
-  console.log(cart.achars);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "cart"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "The Cart"), cart.total > 0 ? cart.achars.map(function (achar, i) {
@@ -8693,7 +8692,7 @@ var Cart = function Cart(props) {
       key: i
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
       key: achar.id
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, achar.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "$", achar.price), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Quantity: ", achar.Achar_Order.qty)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, achar.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "$", achar.price / 100), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Quantity: ", achar.Achar_Order.qty)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
       onClick: /*#__PURE__*/function () {
         var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(e) {
           return regeneratorRuntime.wrap(function _callee$(_context) {
@@ -8721,6 +8720,7 @@ var Cart = function Cart(props) {
         };
       }()
     }, "Delete from Cart"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      disabled: achar.Achar_Order.qty < 2,
       onClick: /*#__PURE__*/function () {
         var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(e) {
           return regeneratorRuntime.wrap(function _callee2$(_context2) {
@@ -8774,8 +8774,8 @@ var Cart = function Cart(props) {
           return _ref3.apply(this, arguments);
         };
       }()
-    }, "+")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Your order total is ", cart.total));
-  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Your cart is Empty!"));
+    }, "+")));
+  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Your cart is Empty!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Your order total is $", cart.total / 100));
 };
 
 var mapState = function mapState(state) {
@@ -9174,7 +9174,9 @@ var SingleAchar = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var achar = this.props.achar;
+      var _this$props = this.props,
+          achar = _this$props.achar,
+          cart = _this$props.cart;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, this.state.isDeleted ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", {
         className: "singleAchar"
       }, "No Product!") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -9682,14 +9684,14 @@ var removeAchar = function removeAchar(achar) {
 
 var incrementAchar = function incrementAchar(cart) {
   return {
-    type: INCREASE_QUANT,
+    type: INCREMENT,
     cart: cart
   };
 };
 
 var decrementAchar = function decrementAchar(cart) {
   return {
-    type: DECREASE_QUANT,
+    type: DECRIMENT,
     cart: cart
   };
 };
@@ -9762,7 +9764,7 @@ var decrementCount = function decrementCount(acharId, orderId) {
             case 5:
               _yield$axios$get2 = _context2.sent;
               data = _yield$axios$get2.data;
-              dispatch(decrementCount(data));
+              dispatch(decrementAchar(data));
               _context2.next = 13;
               break;
 
@@ -9907,12 +9909,10 @@ var addToCart = function addToCart(acharId, orderId) {
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
-    case DECRIMENT:
-      return action.cart;
-
-    case INCREMENT:
-      return action.cart;
-
+    // case DECRIMENT:
+    //     return action.cart
+    // case INCREMENT:
+    //   return action.cart;
     case GET_CART:
       return action.cart;
 

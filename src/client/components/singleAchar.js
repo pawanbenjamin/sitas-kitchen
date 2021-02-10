@@ -77,7 +77,7 @@ class SingleAchar extends React.Component {
   }
 
   render() {
-    const { achar } = this.props;
+    const { achar, cart } = this.props;
     return (
       <div>
         {this.state.isDeleted ? (

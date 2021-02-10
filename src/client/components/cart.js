@@ -20,7 +20,6 @@ const Cart = (props) => {
     }
   }, [user]);
 
-  console.log(cart.achars);
   return (
     <div className="cart">
       <h3>The Cart</h3>
@@ -30,7 +29,7 @@ const Cart = (props) => {
             <div key={i}>
               <ul key={achar.id}>
                 <li>{achar.name}</li>
-                <li>${achar.price}</li>
+                <li>${achar.price / 100}</li>
                 <li>Quantity: {achar.Achar_Order.qty}</li>
               </ul>
               <button
@@ -43,6 +42,7 @@ const Cart = (props) => {
                 Delete from Cart
               </button>
               <button
+                disabled={achar.Achar_Order.qty < 2}
                 onClick={async (e) => {
                   e.preventDefault();
                   await subQty(achar.id, cart.id);
@@ -61,12 +61,12 @@ const Cart = (props) => {
                 +
               </button>
             </div>
-            <h3>Your order total is {cart.total}</h3>
           </>
         ))
       ) : (
         <h4>Your cart is Empty!</h4>
       )}
+      <h3>Your order total is ${cart.total / 100}</h3>
     </div>
   );
 };
