@@ -50,6 +50,7 @@ router.post("/:guest", async (req, res, next) => {
       }
       achar_order.save();
     }
+    order.save();
     const cart = await Order.findByPk(order.id, {
       include: {
         all: true,

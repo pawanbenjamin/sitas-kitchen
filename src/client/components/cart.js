@@ -55,8 +55,7 @@ const Cart = (props) => {
       >
         The Cart
       </Typography>
-      {!user.id ? <>{}</> : null}
-      {cart.total > 0 ? (
+      {cart.id ? (
         cart.achars.map((achar, i) => (
           <Card
             style={{
@@ -128,8 +127,7 @@ const Cart = (props) => {
           textAlign: "center",
         }}
       >
-        Your order total is $
-        {typeof cart.total / 100 != "number" ? 0 : cart.total / 100}
+        Your order total is ${cart.total / 100}
       </Typography>
     </div>
   );
