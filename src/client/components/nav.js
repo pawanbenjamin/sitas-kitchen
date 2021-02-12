@@ -2,11 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../store/user";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import useScrollTrigger from "@material-ui/core/useScrollTrigger";
-import Button from "@material-ui/core/Button";
-import { makeStyles } from "@material-ui/styles";
 
 const Nav = ({ isLoggedIn, handleClick }) => {
   return (

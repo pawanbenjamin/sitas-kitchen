@@ -12,8 +12,6 @@ import TextField from "@material-ui/core/TextField";
 const AuthForm = (props) => {
   const { name, displayName, handleSubmit, error, user, getCart } = props;
 
-  console.log(user);
-
   return (
     <div>
       {user.id ? (

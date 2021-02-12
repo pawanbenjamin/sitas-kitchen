@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import {
   fetchCart,
   deleteCartItem,
   incrementCount,
   decrementCount,
+  fetchGuestCart,
 } from "../store/cart";
 import { fetchAchars } from "../store/achars";
 
@@ -18,11 +19,26 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 
 const Cart = (props) => {
-  const { user, getCart, cart, removeItem, getAchars, addQty, subQty } = props;
+  const {
+    user,
+    getCart,
+    cart,
+    removeItem,
+    getAchars,
+    addQty,
+    subQty,
+    getGuestCart,
+  } = props;
+
+  const [guestCart, setGuestCart] = useState(
+    JSON.parse(window.localStorage.getItem("cart"))
+  );
 
   useEffect(() => {
     if (!user.id) {
       console.log("NO USER");
+      getGuestCart(guestCart);
+      getAchars();
     } else {
       getCart(user.id);
       getAchars();
@@ -39,6 +55,7 @@ const Cart = (props) => {
       >
         The Cart
       </Typography>
+      {!user.id ? <>{}</> : null}
       {cart.total > 0 ? (
         cart.achars.map((achar, i) => (
           <Card
@@ -96,7 +113,14 @@ const Cart = (props) => {
           </Card>
         ))
       ) : (
-        <Typography>Your cart is Empty!</Typography>
+        <Typography
+          style={{
+            margin: "20px",
+            textAlign: "center",
+          }}
+        >
+          Your cart is Empty!
+        </Typography>
       )}
       <Typography
         style={{
@@ -104,7 +128,8 @@ const Cart = (props) => {
           textAlign: "center",
         }}
       >
-        Your order total is ${cart.total / 100}
+        Your order total is $
+        {typeof cart.total / 100 != "number" ? 0 : cart.total / 100}
       </Typography>
     </div>
   );
@@ -121,6 +146,7 @@ const mapDispatch = (dispatch) => ({
   getAchars: () => dispatch(fetchAchars()),
   addQty: (acharId, orderId) => dispatch(incrementCount(acharId, orderId)),
   subQty: (acharId, orderId) => dispatch(decrementCount(acharId, orderId)),
+  getGuestCart: (cart) => dispatch(fetchGuestCart(cart)),
 });
 
 export default connect(mapState, mapDispatch)(Cart);

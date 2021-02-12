@@ -37,7 +37,6 @@ class Achars extends React.Component {
   }
 
   render() {
-    console.log(this.props.achars.length);
     return (
       <div className="achars">
         <Typography className="desc">All the Achars</Typography>

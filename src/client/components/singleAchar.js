@@ -4,8 +4,13 @@ import { fetchAchar } from "../store/singleAchar";
 import { fetchAchars } from "../store/achars";
 import { deleteTheAchar, updateTheAchar } from "../store/singleAchar";
 import { addToCart, fetchCart } from "../store/cart";
+import Paper from "@material-ui/core/Paper";
 
 import UpdateAchar from "./updateAchar";
+
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+import user from "../store/user";
 
 class SingleAchar extends React.Component {
   constructor(props) {
@@ -55,17 +60,17 @@ class SingleAchar extends React.Component {
 
   async handleAdd(e) {
     e.preventDefault();
-    // if (!this.props.user.id) {
-    //   const cart = JSON.parse(window.localStorage.getItem("cart"));
-    //   if (!cart[this.props.achar.id]) {
-    //     cart[this.props.achar.id] = 1;
-    //   } else {
-    //     cart[this.props.achar.id]++;
-    //   }
-    //   const stringedCart = JSON.stringify(cart);
-    //   window.localStorage.setItem("cart", stringedCart);
-    // } else {
-    //   if (!this.props.cart.id) {
+    console.log(window.localStorage.cart);
+    if (!this.props.user.id) {
+      const cart = JSON.parse(window.localStorage.getItem("cart"));
+      if (!cart[this.props.achar.id]) {
+        cart[this.props.achar.id] = 1;
+      } else {
+        cart[this.props.achar.id]++;
+      }
+      const stringedCart = JSON.stringify(cart);
+      window.localStorage.setItem("cart", stringedCart);
+    }
     if (this.props.user.id) {
       await this.props.getCart(this.props.user.id);
       await this.props.addToTheCart(this.props.achar.id, this.props.cart.id);
@@ -78,21 +83,27 @@ class SingleAchar extends React.Component {
 
   render() {
     const { achar, cart } = this.props;
+
     return (
       <div>
         {this.state.isDeleted ? (
-          <h3 className="singleAchar">No Product!</h3>
+          <Typography className="singleAchar">No Product!</Typography>
         ) : (
-          <div className="singleAchar">
+          <Paper style={{ borderRadius: "10px" }} className="singleAchar">
             <img src={achar.imageUrl} height={150} width={150} />
-            <h3>{achar.name}</h3>
-            <button onClick={this.handleAdd}>Add to Cart</button>
-            <p>{achar.description}</p>
-            <h4>Price: ${achar.price / 100}</h4>
-            <button onClick={this.handleDelete}>Delete from DB</button>
+            <Typography>{achar.name}</Typography>
 
-            <UpdateAchar handleSubmit={this.handleSubmit} />
-          </div>
+            <Button onClick={this.handleAdd}>Add to Cart</Button>
+
+            <Typography>{achar.description}</Typography>
+            <Typography>Price: ${achar.price / 100}</Typography>
+
+            <UpdateAchar
+              handleDelete={this.handleDelete}
+              user={this.props.user}
+              handleSubmit={this.handleSubmit}
+            />
+          </Paper>
         )}
       </div>
     );

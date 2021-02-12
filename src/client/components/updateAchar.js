@@ -1,5 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 
 export default class UpdateAchar extends React.Component {
   constructor(props) {
@@ -8,22 +10,38 @@ export default class UpdateAchar extends React.Component {
 
   render() {
     return (
-      <div className="updateAchar">
-        <form id="updateAchar" onSubmit={this.props.handleSubmit}>
-          <input name="name" placeholder="Name"></input>
+      <>
+        {this.props.user ? (
+          <div className="updateAchar">
+            <Button onClick={this.props.handleDelete}>
+              {" "}
+              ** Delete from DB **
+            </Button>
+            <form id="updateAchar" onSubmit={this.props.handleSubmit}>
+              <TextField name="name" placeholder="Name"></TextField>
 
-          <input name="price" placeholder="Price"></input>
+              <TextField name="price" placeholder="Price"></TextField>
 
-          <input name="description" placeholder="Description"></input>
+              <TextField
+                name="description"
+                placeholder="Description"
+              ></TextField>
 
-          <input name="spiceLevel" placeholder="Spice Level"></input>
+              <TextField
+                name="spiceLevel"
+                placeholder="Spice Level"
+              ></TextField>
 
-          <input name="stockQty" placeholder="Stock Qty"></input>
+              <TextField name="stockQty" placeholder="Stock Qty"></TextField>
 
-          <input name="imageUrl" placeholder="Image URL"></input>
-          <button type="submit">Submit</button>
-        </form>
-      </div>
+              <TextField name="imageUrl" placeholder="Image URL"></TextField>
+              <Button style={{ marginTop: "25px" }} type="submit">
+                Submit
+              </Button>
+            </form>
+          </div>
+        ) : null}
+      </>
     );
   }
 }

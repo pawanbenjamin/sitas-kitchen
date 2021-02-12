@@ -83,13 +83,20 @@ export const addToCart = (acharId, orderId) => async (dispatch) => {
     const achar = await axios.put(
       `/api/orders/${orderId}/addProduct/${acharId}`
     );
-
     dispatch(addAchar(achar.data));
   } catch (error) {
     console.error(error);
   }
 };
 
+export const fetchGuestCart = (cart) => async (dispatch) => {
+  try {
+    const { data } = await axios.post("/api/orders/guest", cart);
+    dispatch(gotCart(data));
+  } catch (error) {
+    console.error(error);
+  }
+};
 export default function (state = {}, action) {
   switch (action.type) {
     // case DECRIMENT:

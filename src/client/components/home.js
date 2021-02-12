@@ -14,7 +14,6 @@ const Home = (props) => {
   useEffect(() => {
     if (!user.id) {
       // window local storage
-      console.log("No User");
       const cart = {};
       const stringCart = JSON.stringify(cart);
       window.localStorage.setItem("cart", stringCart);
