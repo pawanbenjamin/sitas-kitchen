@@ -16909,6 +16909,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var Cart = function Cart(props) {
+  console.log("GUEST CART GIT CHECK");
   var user = props.user,
       getCart = props.getCart,
       cart = props.cart,
