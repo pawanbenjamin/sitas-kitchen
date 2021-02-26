@@ -16,8 +16,15 @@ router.get("/", async (req, res, next) => {
 
 router.get("/:id", async (req, res, next) => {
   try {
-    const order = await Order.findByPk(req.params.id);
-    res.send(order);
+    const order = await Order.findAll({
+      where: {
+        id: req.params.id,
+      },
+      include: {
+        all: true,
+      },
+    });
+    res.send(order[0]);
   } catch (error) {
     next(error);
   }

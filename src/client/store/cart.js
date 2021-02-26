@@ -76,6 +76,15 @@ export const fetchCart = (id) => async (dispatch) => {
   }
 };
 
+export const retrieveGuestCart = (orderId) => async (dispatch) => {
+  try {
+    const { data } = await axios.get(`/api/orders/${orderId}`);
+    dispatch(gotCart(data));
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export const addToCart = (acharId, orderId) => async (dispatch) => {
   try {
     console.log("In THunk");
@@ -89,7 +98,7 @@ export const addToCart = (acharId, orderId) => async (dispatch) => {
   }
 };
 
-export const fetchGuestCart = (cart) => async (dispatch) => {
+export const postGuestCart = (cart) => async (dispatch) => {
   try {
     const { data } = await axios.post("/api/orders/guest", cart);
     dispatch(gotCart(data));
