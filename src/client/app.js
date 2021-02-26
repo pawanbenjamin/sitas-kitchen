@@ -1,16 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import Routes from "./routes";
 import Nav from "./components/nav";
 import { ThemeProvider } from "@material-ui/styles";
 import theme from "./components/theme";
 
 const App = () => {
+  const [value, setValue] = useState(0);
+
   return (
     <ThemeProvider theme={theme}>
-      <div className="app">
-        <Nav className="header" />
-        <Routes className="stomach" />
-      </div>
+      <Nav value={value} setValue={setValue} className="header" />
+      <Routes className="stomach" />
     </ThemeProvider>
   );
 };
