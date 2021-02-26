@@ -2,25 +2,21 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import {
   fetchCart,
+  retrieveGuestCart,
   deleteCartItem,
   incrementCount,
   decrementCount,
-  fetchGuestCart,
+  postGuestCart,
 } from "../store/cart";
 import { fetchAchars } from "../store/achars";
 
-import Paper from "@material-ui/core/Paper";
 import { CardActionArea, Typography } from "@material-ui/core";
 import Card from "@material-ui/core/Card";
-import Grid from "@material-ui/core/Grid";
-import CardMedia from "@material-ui/core/CardMedia";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 
 const Cart = (props) => {
-  console.log("GUEST CART GIT CHECK");
-
   const {
     user,
     getCart,
@@ -30,6 +26,7 @@ const Cart = (props) => {
     addQty,
     subQty,
     getGuestCart,
+    retrieveCart,
   } = props;
 
   const [guestCart, setGuestCart] = useState(
@@ -46,6 +43,8 @@ const Cart = (props) => {
       getAchars();
     }
   }, [user]);
+
+  console.log("guest cart", guestCart);
 
   return (
     <div>
@@ -86,7 +85,11 @@ const Cart = (props) => {
                 onClick={async (e) => {
                   e.preventDefault();
                   await removeItem(cart.id, achar.id);
-                  await getCart(user.id);
+                  if (user.id) {
+                    await getCart(user.id);
+                  } else {
+                    await retrieveCart(cart.id);
+                  }
                 }}
               >
                 Delete from Cart
@@ -96,7 +99,11 @@ const Cart = (props) => {
                 onClick={async (e) => {
                   e.preventDefault();
                   await subQty(achar.id, cart.id);
-                  await getCart(user.id);
+                  if (user.id) {
+                    await getCart(user.id);
+                  } else {
+                    await retrieveCart(cart.id);
+                  }
                 }}
               >
                 -
@@ -105,7 +112,11 @@ const Cart = (props) => {
                 onClick={async (e) => {
                   e.preventDefault();
                   await addQty(achar.id, cart.id);
-                  await getCart(user.id);
+                  if (user.id) {
+                    await getCart(user.id);
+                  } else {
+                    await retrieveCart(cart.id);
+                  }
                 }}
               >
                 +
@@ -146,7 +157,8 @@ const mapDispatch = (dispatch) => ({
   getAchars: () => dispatch(fetchAchars()),
   addQty: (acharId, orderId) => dispatch(incrementCount(acharId, orderId)),
   subQty: (acharId, orderId) => dispatch(decrementCount(acharId, orderId)),
-  getGuestCart: (cart) => dispatch(fetchGuestCart(cart)),
+  getGuestCart: (cart) => dispatch(postGuestCart(cart)),
+  retrieveCart: (cartId) => dispatch(retrieveGuestCart(cartId)),
 });
 
 export default connect(mapState, mapDispatch)(Cart);
