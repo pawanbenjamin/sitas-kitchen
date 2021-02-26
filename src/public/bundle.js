@@ -16905,11 +16905,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
-
-
 var Cart = function Cart(props) {
-  console.log("GUEST CART GIT CHECK");
   var user = props.user,
       getCart = props.getCart,
       cart = props.cart,
@@ -16917,7 +16913,8 @@ var Cart = function Cart(props) {
       getAchars = props.getAchars,
       addQty = props.addQty,
       subQty = props.subQty,
-      getGuestCart = props.getGuestCart;
+      getGuestCart = props.getGuestCart,
+      retrieveCart = props.retrieveCart;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(JSON.parse(window.localStorage.getItem("cart"))),
       _useState2 = _slicedToArray(_useState, 2),
@@ -16934,6 +16931,7 @@ var Cart = function Cart(props) {
       getAchars();
     }
   }, [user]);
+  console.log("guest cart", guestCart);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__.default, {
     style: {
       margin: "20px",
@@ -16968,10 +16966,23 @@ var Cart = function Cart(props) {
                   return removeItem(cart.id, achar.id);
 
                 case 3:
-                  _context.next = 5;
+                  if (!user.id) {
+                    _context.next = 8;
+                    break;
+                  }
+
+                  _context.next = 6;
                   return getCart(user.id);
 
-                case 5:
+                case 6:
+                  _context.next = 10;
+                  break;
+
+                case 8:
+                  _context.next = 10;
+                  return retrieveCart(cart.id);
+
+                case 10:
                 case "end":
                   return _context.stop();
               }
@@ -16996,10 +17007,23 @@ var Cart = function Cart(props) {
                   return subQty(achar.id, cart.id);
 
                 case 3:
-                  _context2.next = 5;
+                  if (!user.id) {
+                    _context2.next = 8;
+                    break;
+                  }
+
+                  _context2.next = 6;
                   return getCart(user.id);
 
-                case 5:
+                case 6:
+                  _context2.next = 10;
+                  break;
+
+                case 8:
+                  _context2.next = 10;
+                  return retrieveCart(cart.id);
+
+                case 10:
                 case "end":
                   return _context2.stop();
               }
@@ -17023,10 +17047,23 @@ var Cart = function Cart(props) {
                   return addQty(achar.id, cart.id);
 
                 case 3:
-                  _context3.next = 5;
+                  if (!user.id) {
+                    _context3.next = 8;
+                    break;
+                  }
+
+                  _context3.next = 6;
                   return getCart(user.id);
 
-                case 5:
+                case 6:
+                  _context3.next = 10;
+                  break;
+
+                case 8:
+                  _context3.next = 10;
+                  return retrieveCart(cart.id);
+
+                case 10:
                 case "end":
                   return _context3.stop();
               }
@@ -17077,7 +17114,10 @@ var mapDispatch = function mapDispatch(dispatch) {
       return dispatch((0,_store_cart__WEBPACK_IMPORTED_MODULE_2__.decrementCount)(acharId, orderId));
     },
     getGuestCart: function getGuestCart(cart) {
-      return dispatch((0,_store_cart__WEBPACK_IMPORTED_MODULE_2__.fetchGuestCart)(cart));
+      return dispatch((0,_store_cart__WEBPACK_IMPORTED_MODULE_2__.postGuestCart)(cart));
+    },
+    retrieveCart: function retrieveCart(cartId) {
+      return dispatch((0,_store_cart__WEBPACK_IMPORTED_MODULE_2__.retrieveGuestCart)(cartId));
     }
   };
 };
@@ -17924,8 +17964,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "decrementCount": () => /* binding */ decrementCount,
 /* harmony export */   "deleteCartItem": () => /* binding */ deleteCartItem,
 /* harmony export */   "fetchCart": () => /* binding */ fetchCart,
+/* harmony export */   "retrieveGuestCart": () => /* binding */ retrieveGuestCart,
 /* harmony export */   "addToCart": () => /* binding */ addToCart,
-/* harmony export */   "fetchGuestCart": () => /* binding */ fetchGuestCart,
+/* harmony export */   "postGuestCart": () => /* binding */ postGuestCart,
 /* harmony export */   "default": () => /* export default binding */ __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
@@ -18165,22 +18206,23 @@ var fetchCart = function fetchCart(id) {
     };
   }();
 };
-var addToCart = function addToCart(acharId, orderId) {
+var retrieveGuestCart = function retrieveGuestCart(orderId) {
   return /*#__PURE__*/function () {
     var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(dispatch) {
-      var achar;
+      var _yield$axios$get5, data;
+
       return regeneratorRuntime.wrap(function _callee5$(_context5) {
         while (1) {
           switch (_context5.prev = _context5.next) {
             case 0:
               _context5.prev = 0;
-              console.log("In THunk");
-              _context5.next = 4;
-              return axios__WEBPACK_IMPORTED_MODULE_0___default().put("/api/orders/".concat(orderId, "/addProduct/").concat(acharId));
+              _context5.next = 3;
+              return axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/orders/".concat(orderId));
 
-            case 4:
-              achar = _context5.sent;
-              dispatch(addAchar(achar.data));
+            case 3:
+              _yield$axios$get5 = _context5.sent;
+              data = _yield$axios$get5.data;
+              dispatch(gotCart(data));
               _context5.next = 11;
               break;
 
@@ -18202,23 +18244,22 @@ var addToCart = function addToCart(acharId, orderId) {
     };
   }();
 };
-var fetchGuestCart = function fetchGuestCart(cart) {
+var addToCart = function addToCart(acharId, orderId) {
   return /*#__PURE__*/function () {
     var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(dispatch) {
-      var _yield$axios$post, data;
-
+      var achar;
       return regeneratorRuntime.wrap(function _callee6$(_context6) {
         while (1) {
           switch (_context6.prev = _context6.next) {
             case 0:
               _context6.prev = 0;
-              _context6.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_0___default().post("/api/orders/guest", cart);
+              console.log("In THunk");
+              _context6.next = 4;
+              return axios__WEBPACK_IMPORTED_MODULE_0___default().put("/api/orders/".concat(orderId, "/addProduct/").concat(acharId));
 
-            case 3:
-              _yield$axios$post = _context6.sent;
-              data = _yield$axios$post.data;
-              dispatch(gotCart(data));
+            case 4:
+              achar = _context6.sent;
+              dispatch(addAchar(achar.data));
               _context6.next = 11;
               break;
 
@@ -18237,6 +18278,44 @@ var fetchGuestCart = function fetchGuestCart(cart) {
 
     return function (_x6) {
       return _ref6.apply(this, arguments);
+    };
+  }();
+};
+var postGuestCart = function postGuestCart(cart) {
+  return /*#__PURE__*/function () {
+    var _ref7 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee7(dispatch) {
+      var _yield$axios$post, data;
+
+      return regeneratorRuntime.wrap(function _callee7$(_context7) {
+        while (1) {
+          switch (_context7.prev = _context7.next) {
+            case 0:
+              _context7.prev = 0;
+              _context7.next = 3;
+              return axios__WEBPACK_IMPORTED_MODULE_0___default().post("/api/orders/guest", cart);
+
+            case 3:
+              _yield$axios$post = _context7.sent;
+              data = _yield$axios$post.data;
+              dispatch(gotCart(data));
+              _context7.next = 11;
+              break;
+
+            case 8:
+              _context7.prev = 8;
+              _context7.t0 = _context7["catch"](0);
+              console.error(_context7.t0);
+
+            case 11:
+            case "end":
+              return _context7.stop();
+          }
+        }
+      }, _callee7, null, [[0, 8]]);
+    }));
+
+    return function (_x7) {
+      return _ref7.apply(this, arguments);
     };
   }();
 };
