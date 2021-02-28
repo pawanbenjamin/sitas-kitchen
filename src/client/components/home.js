@@ -6,10 +6,22 @@ import { connect } from "react-redux";
 import { fetchCart } from "../store/cart";
 import { fetchAchars } from "../store/achars";
 
+import { makeStyles } from "@material-ui/styles";
+
+const useStyles = makeStyles((theme) => ({
+  page: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+}));
+
 const Home = (props) => {
   const { user, getCart, getAchars } = props;
   // Get or Create DB cart if there is a user
   // if no user, initialize window.localStogage cart
+
+  const classes = useStyles();
 
   useEffect(() => {
     if (!user.id) {
@@ -25,7 +37,7 @@ const Home = (props) => {
   }, [user]);
 
   return (
-    <div className="home">
+    <div className={classes.page}>
       {user.id ? (
         <>
           <Typography>Welcome {user.firstName} to Sita's Kitchen!</Typography>

@@ -9,15 +9,31 @@ import TextField from "@material-ui/core/TextField";
 
 // follow auth-form component
 
+import { makeStyles } from "@material-ui/styles";
+
+const useStyles = makeStyles(() => ({
+  form: {
+    alignItems: "center",
+    textAlign: "center",
+    display: "flex",
+    justifyContent: "space-evenly",
+    flexDirection: "column",
+    marginTop: "4em",
+    marginBottom: "2em",
+  },
+}));
+
 const AuthForm = (props) => {
   const { name, displayName, handleSubmit, error, user, getCart } = props;
+
+  const classes = useStyles();
 
   return (
     <div>
       {user.id ? (
         <Redirect to="/"></Redirect>
       ) : (
-        <form onSubmit={handleSubmit} name={name}>
+        <form onSubmit={handleSubmit} name={name} className={classes.form}>
           <TextField name="username" type="text" placeholder="User-Name" />
           <TextField name="firstName" type="text" placeholder="First Name" />
           <TextField name="lastName" type="text" placeholder="Last Name" />
