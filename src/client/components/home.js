@@ -10,7 +10,9 @@ import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles((theme) => ({
   page: {
-    toolbar: theme.mixins.toolbar,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
 }));
 

@@ -10,7 +10,6 @@ import UpdateAchar from "./updateAchar";
 
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import user from "../store/user";
 
 class SingleAchar extends React.Component {
   constructor(props) {
@@ -85,11 +84,26 @@ class SingleAchar extends React.Component {
     const { achar, cart } = this.props;
 
     return (
-      <div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
         {this.state.isDeleted ? (
           <Typography className="singleAchar">No Product!</Typography>
         ) : (
-          <Paper style={{ borderRadius: "10px" }} className="singleAchar">
+          <Paper
+            style={{ borderRadius: "10px" }}
+            style={{
+              marginTop: "4em",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              width: 300,
+            }}
+          >
             <img src={achar.imageUrl} height={150} width={150} />
             <Typography>{achar.name}</Typography>
 
