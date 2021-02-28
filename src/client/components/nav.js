@@ -64,7 +64,14 @@ const Nav = ({ isLoggedIn, handleClick, value, setValue }) => {
     <>
       <ElevationScroll>
         <AppBar className={classes.appBar} position="fixed" justify="row">
-          <Button className={classes.button}>Sita's Kitchen</Button>
+          <Button
+            className={classes.button}
+            component={Link}
+            to="/"
+            disableRipple
+          >
+            Sita's Kitchen
+          </Button>
           <Toolbar disableGutters className={classes.toolbar}>
             {isLoggedIn ? (
               <Tabs
